@@ -1,0 +1,145 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap'); */
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    position: relative;
+    color: #ffff;
+    font-weight: 500;
+    /* Ẩn thanh cuộn dọc */
+    /* overflow-y: hidden !important; */
+}
+*::selection{
+  background-color: #ec4f00;
+  color: #000000;
+}
+
+body {
+  overflow-y: hidden !important; /* Ẩn thanh cuộn dọc */
+  background-color: #000000 !important;
+}
+
+h1, h2, h3, h6{
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    letter-spacing: -.03em !important;
+    font-family: 'Rajdhani', sans-serif !important;
+}
+h4{
+    color: #ffffff !important;
+    font-weight: 600 !important;
+    letter-spacing: -.03em !important;
+    font-family: 'Rajdhani', sans-serif !important;
+    margin: 0 !important;
+}
+
+hr{
+    background-color: #ec4e00 !important;
+    color: #ec4f00 !important;
+    height: 2px !important;
+    opacity: 100 !important;
+    margin-top: -5px !important;
+}
+
+.background-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+}
+
+.background-video video {
+  width: 100%;
+  height: 100vh;
+  object-fit: fill;
+}
+
+.sideBar{
+    height: 100vh;
+    padding: 10px 20px 10px 20px !important;
+    border: 1px solid rgb(255, 255, 255);
+}
+
+.content{
+    padding: 10px 20px 10px 20px !important;
+    background-color: #0000003c;
+}
+
+.product {
+	height: 70vh; /* Định dạng chiều cao của thẻ div */
+	overflow-y: scroll !important;
+}
+/* width */
+::-webkit-scrollbar {
+	width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+
+.productSession{
+  position: relative;
+}
+
+.sort{
+  align-items: center !important;
+}
+/* collapse Form */
+.collapse {
+
+  &:not(.show) {
+    display: none;
+  }
+  
+}
+
+.collapsing {
+  height: 0;
+  overflow: hidden;
+  
+}
+
+.card-body{
+  color: #ffffff;  
+  background-color: rgba(0, 0, 0, 0.796) !important ;
+  border: 2px solid #ec4f00 !important;
+  border-radius: 0% !important;
+}
+.newProduct-input{
+  width: 100% !important;
+  color: #ffffff !important;  
+  background-color: #00000000 !important;
+  padding: 8px !important;
+  border: 0.5px solid #ffffff !important;
+}
+.newProduct-input::placeholder {
+  color: #ffffff !important;  
+}
+.newProduct-input:focus{
+  border: 2px solid #ec4f00 !important;
+}
+
+.product-link{
+  text-decoration: none;
+  color: #ec4f00;
+  font-weight: 600;
+}
+
+.product-link:hover{
+  color: #ffffff;
+  transform: translate(5px, 12px) !important;
+}

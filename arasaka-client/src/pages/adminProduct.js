@@ -8,6 +8,7 @@ import AdminCategory from './../component/AdminCategory';
 import AdminAccount from './../component/AdminAccount';
 import AdminOrder from './../component/AdminOrder';
 import AdminReport from './../component/AdminReport';
+import AdminProductDetail from '../component/AdminProductDetail';
 
 
 function AdminProduct() {
@@ -37,7 +38,7 @@ function AdminProduct() {
             <Route path="/account" element={<AdminAccount />} />
             <Route path="/order" element={<AdminOrder />} />
             <Route path="/report" element={<AdminReport />} />
-            <Route path="/product/detail" element={<><h1>Detail Product</h1> <hr/> </>} />
+            <Route path="/product/:id" element={<AdminProductDetail/>} />
             <Route
               path="/"
               element={

@@ -15,7 +15,6 @@ function ProductCart() {
     try {
       const res = await AxiosService.get(URL);
       if (res.status === 200) {
-        console.log(res.data.data);
         setResults(res.data.data);
       }else if(res.status === 403){
         navigate("/login");

@@ -11,7 +11,6 @@ function AdminCategory() {
   async function getCategory() {
     try {
       const res = await CategoryService.findAll();
-      console.log(res);
       dispatch(findAll(res.data))
     } catch (error) {
       console.log(error);

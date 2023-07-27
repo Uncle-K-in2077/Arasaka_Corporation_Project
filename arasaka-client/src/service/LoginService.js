@@ -12,7 +12,6 @@ const LoginService = {
 
       if (response.status === 200) {
         // Đăng nhập thành công, trả về token
-        console.log(response.data);
         return response.data;
       } else {
         // Đăng nhập thất bại, trả về null hoặc throw error

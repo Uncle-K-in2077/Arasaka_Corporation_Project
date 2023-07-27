@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ac.Converter.ProductConverter;
 import com.ac.DTO.Output;
@@ -33,30 +34,32 @@ import com.ac.Entities.Product;
 import com.ac.Repository.CategoryRepository;
 import com.ac.Repository.ProductRepository;
 import com.ac.Service.JWTService;
-
-
+import com.ac.Service.UploadService;
 
 @RestController
 @RequestMapping("/api/product")
 @CrossOrigin
 public class ProductController {
-	
+
 	public class ErrorResponse {
-	    private String message;
+		private String message;
 
-	    public ErrorResponse(String message) {
-	        this.message = message;
-	    }
+		public ErrorResponse(String message) {
+			this.message = message;
+		}
 
-	    public String getMessage() {
-	        return message;
-	    }
+		public String getMessage() {
+			return message;
+		}
 
-	    public void setMessage(String message) {
-	        this.message = message;
-	    }
+		public void setMessage(String message) {
+			this.message = message;
+		}
 	}
-	
+
+	@Autowired
+	UploadService uploadService;
+
 	@Autowired
 	ProductRepository productRepository;
 
@@ -78,7 +81,7 @@ public class ProductController {
 	public ResponseEntity<Output<List<ProductDTO>>> getAllProduct(
 			@RequestParam(value = "keyword", defaultValue = "") String keyword,
 			@RequestParam(value = "page", defaultValue = "1") int page,
-			@RequestParam(value = "limit", defaultValue = "12") int limit,
+			@RequestParam(value = "limit", defaultValue = "9999") int limit,
 			@RequestParam(value = "category_id", defaultValue = "0") int categoryId,
 			@RequestParam(value = "order_by", defaultValue = "desc") String orderBy,
 			@RequestParam(value = "sort_by", defaultValue = "price") String sortBy,
@@ -89,7 +92,6 @@ public class ProductController {
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 
 		String authToken = httpRequest.getHeader(TOKEN_HEADER);
-		System.out.println(jwtService.validateTokenLogin(authToken));
 		if (jwtService.validateTokenLogin(authToken) == false) {
 			return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
 		}
@@ -198,24 +200,23 @@ public class ProductController {
 //			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 //		}
 //	}
-	
+
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getProductById(@PathVariable("id") int id) {
-	    try {
-	        Optional<Product> product = productRepository.findById(id);
-	        if (product.isPresent()) {
-	            ProductDTO dto = productConverter.toDTO(product.get());
-	            return new ResponseEntity<>(dto, HttpStatus.OK);
-	        } else {
-	            ErrorResponse errorResponse = new ErrorResponse("No product found!");
-	            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
-	        }
-	    } catch (Exception e) {
-	        System.out.println(e.getMessage());
-	        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-	    }
+		try {
+			Optional<Product> product = productRepository.findById(id);
+			if (product.isPresent()) {
+				ProductDTO dto = productConverter.toDTO(product.get());
+				return new ResponseEntity<>(dto, HttpStatus.OK);
+			} else {
+				ErrorResponse errorResponse = new ErrorResponse("No product found!");
+				return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
-
 
 	@PutMapping("/{id}")
 	public ResponseEntity<ProductDTO> updateProduct(@PathVariable("id") int id, @RequestBody ProductDTO dto) {
@@ -230,57 +231,52 @@ public class ProductController {
 		}
 
 	}
-	
+
 	@DeleteMapping("/{id}")
 	public ResponseEntity<?> deleteProduct(@PathVariable("id") int id) {
-	    try {
-	        Optional<Product> product = productRepository.findById(id);
-	        if (product.isPresent()) {
-	            Product existingProduct = product.get();
-	            existingProduct.setStatus(0);
-	            productRepository.save(existingProduct);
-	            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-	        } else {
-	            ErrorResponse errorResponse = new ErrorResponse("Product not found");
-	            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
-	        }
-	    } catch (Exception e) {
-	        System.out.println(e.getMessage());
-	        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-	    }
+		try {
+			Optional<Product> product = productRepository.findById(id);
+			if (product.isPresent()) {
+				Product existingProduct = product.get();
+				existingProduct.setStatus(0);
+				productRepository.save(existingProduct);
+				return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+			} else {
+				ErrorResponse errorResponse = new ErrorResponse("Product not found");
+				return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
-	
+
 	@PutMapping("/{id}/restore")
 	public ResponseEntity<?> restoreProduct(@PathVariable("id") int id) {
-	    try {
-	        Optional<Product> product = productRepository.findById(id);
-	        if (product.isPresent()) {
-	            Product existingProduct = product.get();
-	            existingProduct.setStatus(1);
-	            productRepository.save(existingProduct);
-	            return new ResponseEntity<>(HttpStatus.OK);
-	        } else {
-	            ErrorResponse errorResponse = new ErrorResponse("Product not found");
-	            return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
-	        }
-	    } catch (Exception e) {
-	        System.out.println(e.getMessage());
-	        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-	    }
+		try {
+			Optional<Product> product = productRepository.findById(id);
+			if (product.isPresent()) {
+				Product existingProduct = product.get();
+				existingProduct.setStatus(1);
+				productRepository.save(existingProduct);
+				return new ResponseEntity<>(HttpStatus.OK);
+			} else {
+				ErrorResponse errorResponse = new ErrorResponse("Product not found");
+				return new ResponseEntity<>(errorResponse, HttpStatus.NOT_FOUND);
+			}
+		} catch (Exception e) {
+			System.out.println(e.getMessage());
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
 	}
-
-
 
 	@PostMapping
 	public ResponseEntity<ProductDTO> create(@RequestBody ProductDTO item) {
-		try {
-			Product product = productConverter.toEntity(item);
-			Product saved = productRepository.save(product);
-			System.out.println(saved.getId());
-			return new ResponseEntity<>(productConverter.toDTO(saved), HttpStatus.CREATED);
-		} catch (Exception e) {
-			System.out.println(e.getMessage());
-			return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
-		}
+		
+		Product product = productConverter.toEntity(item);
+		product.setStatus(1);
+		Product saved = productRepository.save(product);
+		return new ResponseEntity<>(productConverter.toDTO(saved), HttpStatus.CREATED);
+
 	}
 }

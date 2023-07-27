@@ -16,7 +16,6 @@ function Login() {
           const token = await LoginService.login(email, password);
           if (token) {
             // Đăng nhập thành công, lưu token vào localStorage hoặc sử dụng AxiosService
-            console.log("Token đây: " + token);
             //  AxiosService.setAuthorizationToken(token);
             localStorage.setItem("token", token);
             setError("Login success");

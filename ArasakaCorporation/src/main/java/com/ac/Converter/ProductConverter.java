@@ -59,6 +59,9 @@ public class ProductConverter {
 
     // Chuyển đổi kiểu String thành Date
     private Date parseDate(String dateString) {
+    	if(dateString == null) {
+    		return new Date();
+    	}
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         try {
             return dateFormat.parse(dateString);

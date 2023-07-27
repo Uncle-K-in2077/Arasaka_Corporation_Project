@@ -40,7 +40,9 @@ public class RegisterController {
 			
 			Account existingAccount = accountService.getAccountByEmail(account.getEmail());
 	        if (existingAccount != null) {
-	            return new ResponseEntity<>("Email allready been used", HttpStatus.BAD_REQUEST);
+	        	System.out.println("Email allready been used");
+	        	String error = "Email allready been used";
+	            return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
 	        }
 			
 			AccountDTO newDTO = new AccountDTO();

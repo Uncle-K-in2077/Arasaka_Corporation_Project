@@ -20,16 +20,13 @@ class AxiosService {
         const token = process.env.REACT_APP_TOKEN;
         if (token) {
           config.headers.Authorization = token;
-          console.log("Token ở header" + config.headers.Authorization);
         }else{
           config.headers.Authorization = localStorage.getItem("token");
-          console.log("Token ở header" + config.headers.Authorization);
         }
         return config;
       },
       (error) => {
         // Xử lý lỗi khi gửi yêu cầu
-        console.log("Token ở header lỗi");
         return Promise.reject(error);
       }
     );
@@ -47,6 +44,19 @@ class AxiosService {
   async post(url, data) {
     try {
       const response = await this.httpClient.post(url, data);
+      return response;
+    } catch (error) {
+      this.handleRequestError("AxiosService Error" + error);
+    }
+  }
+  // for product creating
+  async postProduct(url, data) {
+    try {
+      const response = await this.httpClient.post(url, data, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       return response;
     } catch (error) {
       this.handleRequestError(error);

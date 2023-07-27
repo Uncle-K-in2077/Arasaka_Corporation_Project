@@ -10,7 +10,6 @@ function AdminAccount() {
     async function getAccountData(){
         try {
             const res = await AccountService.getAllAccounts();
-            console.log(res);
             dispatch(findAll(res.data));
 
 

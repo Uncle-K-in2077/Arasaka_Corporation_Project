@@ -119,6 +119,12 @@
  .form > *:nth-child(8) {
 	 animation-delay: 1.8s;
 }
+ .form > *:nth-child(9) {
+	 animation-delay: 1.9s;
+}
+ .form > *:nth-child(10) {
+	 animation-delay: 2s;
+}
  .form__image {
 	 position: absolute;
 	 animation: none;
@@ -156,7 +162,7 @@
 	 font-size: 16px;
 }
  .input__element:focus {
-	 box-shadow: inset 0 -2px 0 0 #fdee06;
+	 box-shadow: inset 0 -2px 0 0 #9f0101;
 	 outline: none;
 }
  .input__label {
@@ -174,7 +180,7 @@
 	 transform: translate3d(0, -5px, 0);
 }
  .button {
-	 background: #fdee06;
+	 background: #E30000 !important;
 	 border: 0;
 	 padding: 0;
 	 margin: 0;
@@ -259,17 +265,19 @@
 
 .cybr-btn + .cybr-btn {
   margin-top: 2rem;
+  
 }
 
 .cybr-btn {
   --primary: hsl(var(--primary-hue), 85%, calc(var(--primary-lightness, 50) * 1%));
   --shadow-primary: hsl(var(--shadow-primary-hue), 90%, 50%);
-  --primary-hue: 420;
+  --primary-hue: 720;
   --primary-lightness: 50;
-  --color: hsl(0, 0%, 100%);
+  --background-color: #9f0101 !important;
+  --color: hsl(0, 0%, 0%);
   /* --color: blue; */
   --font-size: 26px;
-  --shadow-primary-hue: 180;
+  --shadow-primary-hue: 900;
   --label-size: 9px;
   --shadow-secondary-hue: 60;
   --shadow-secondary: hsl(var(--shadow-secondary-hue), 90%, 60%);
@@ -446,3 +454,35 @@
 .register-link:hover{
 	color: aliceblue;
 }
+
+/* Loading componet */
+/* .loading svg polyline {
+  fill: none;
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.loading svg polyline#back {
+  fill: none;
+  stroke: #ff4d5033;
+}
+
+.loading svg polyline#front {
+  fill: none;
+  stroke: #ff4d4f;
+  stroke-dasharray: 48, 144;
+  stroke-dashoffset: 192;
+  animation: dash_682 1.4s linear infinite;
+}
+
+@keyframes dash_682 {
+  72.5% {
+    opacity: 0;
+  }
+
+  to {
+    stroke-dashoffset: 0;
+  }
+} */
+

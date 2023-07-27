@@ -15,7 +15,7 @@ public class CorsConfig {
                 registry.addMapping("/api/**")
                         .allowedOrigins("http://localhost:3000") // Cho phép truy cập từ tên miền này
                         .allowedMethods("GET", "POST", "PUT", "DELETE")
-                        .allowedHeaders("*")
+                        .allowedHeaders("*","multipart/form-data")
                         .allowCredentials(true);
             }
         };

@@ -42,12 +42,11 @@ const AccountService = {
     try {
       const response = await AxiosService.post("/register", userInfo);
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         // Đăng ký thành công, trả về thông tin người dùng đã đăng ký
-        return response.data;
-      } else {
-        // Đăng ký thất bại, trả về null hoặc throw error
-        return null;
+        return response;
+      } else if(response.status === 400) {
+        return response.error;
       }
     } catch (error) {
       console.error("Error during registration:", error);

@@ -6,7 +6,7 @@ const ProductService = {
   async getAllProducts() {
     try {
       const response = await AxiosService.get("/product");
-      return response.data;
+      return response;
     } catch (error) {
       console.error("Error fetching products:", error);
       throw error;

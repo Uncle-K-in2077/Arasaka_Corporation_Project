@@ -1,0 +1,58 @@
+.video-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: -1;
+}
+
+/* Thiết lập kích thước cho video làm nền */
+#video-background {
+  min-width: 100%;
+  min-height: 100vh !important;
+}
+
+/* Đảm bảo nội dung không bị che phủ bởi video */
+
+
+.nav-link{
+    color: #ffffff !important;
+    font-weight: 700 !important;
+    letter-spacing: -.03em !important;
+    font-family: 'Rajdhani', sans-serif !important;
+    font-size: 18px !important;
+    line-height: 23px !important;
+    text-transform: uppercase !important;
+    letter-spacing: .12em !important;
+}
+
+.nav-item{
+  margin-right: 1.5rem !important;
+}
+
+.navbar{
+  justify-content: end !important;
+  padding-top: 0 !important;
+}
+
+.header-logo{
+  width: 25% !important;
+}
+
+.navbar-content{
+  min-width: 100% !important;
+}
+.navbar-collapse{
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 0px 20px !important;
+}
+
+.nav-link-active{
+  color: #FE5000 !important;
+  font-weight: 900 !important;
+}
+

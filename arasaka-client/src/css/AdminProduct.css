@@ -16,7 +16,8 @@
 
 body {
   overflow-y: hidden !important; /* Ẩn thanh cuộn dọc */
-  background-color: #000000 !important;
+  /* back-ground for all pages */
+  background-color: #111111 !important; 
 }
 
 h1, h2, h3, h6{
@@ -32,6 +33,7 @@ h4{
     font-family: 'Rajdhani', sans-serif !important;
     margin: 0 !important;
 }
+
 
 hr{
     background-color: #ec4e00 !important;
@@ -142,4 +144,124 @@ hr{
 .product-link:hover{
   color: #ffffff;
   transform: translate(5px, 12px) !important;
+}
+
+.detail-product-title{
+  color: #ec4f00 !important;
+  font-weight: 600 !important;
+  letter-spacing: -.03em !important;
+  font-family: 'Rajdhani', sans-serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: .12em !important;
+}
+.detail-product-title-1{
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  letter-spacing: -.03em !important;
+  font-family: 'Rajdhani', sans-serif !important;
+  text-transform: uppercase !important;
+  letter-spacing: .12em !important;
+}
+
+.detail-product-img{
+  border: 1px solid #ffffffa3 !important;
+}
+
+.detail-product-name{
+    font-size: 60px !important;
+    line-height: 1em !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+  }
+
+.detail-product-price{
+    letter-spacing: -.04em !important;
+    font-weight: 700 !important;
+    font-family: Rajdhani,sans-serif !important;
+    font-size: 50px !important;
+    line-height: 1em !important;
+}
+
+.product-detail-desc{
+  margin-top: 30px !important;
+}
+
+.star{
+  color: #ec4f00 !important;
+  font-size: 32px !important;
+  line-height: 60% !important;
+}
+
+.customer-reviews{
+  font-size: 18px !important;
+  font-weight: 350;
+}
+
+.product-detail-desc{
+  margin-top: 20px !important;
+  font-weight: 300 !important;
+  font-size: 18px !important;
+  font-family: "Roboto Condensed",sans-serif !important;
+  text-align: justify !important;
+}
+
+.detail-product-main{
+  background-color: #00000064 !important;
+}
+
+.detail-product-category{
+  color: #ec4e00 !important;
+    font-weight: 600 !important;
+    letter-spacing: -.03em !important;
+    font-family: 'Rajdhani', sans-serif !important;
+    margin: 0 !important;
+    text-transform: uppercase !important;
+}
+
+.class{
+  margin-bottom: 17px !important;
+}
+
+/* button effect */
+.customButton {
+ padding: 0.6em 1.6em !important;
+ border: 2px solid #ec4e00 !important;
+ overflow: hidden !important;
+ background-color: transparent !important;
+ text-align: center !important;
+ text-transform: uppercase !important;
+ font-size: 18px !important;
+ transition: .3s !important;
+ z-index: 1 !important;
+ font-family: 'Rajdhani', sans-serif !important;
+
+ color: #ec4e00 !important;
+}
+
+.customButton::before {
+ content: '' !important;
+ width: 0 !important;
+ height: 300% !important;
+ position: absolute !important;
+ top: 50% !important;
+ left: 50% !important;
+ transform: translate(-50%, -50%) rotate(180deg) !important;
+ background: #ec4e00 !important;
+ transition: .5s ease !important;
+ display: block !important;
+ z-index: -1 !important;
+}
+
+.customButton:hover::before {
+ width: 205% !important;
+}
+
+.customButton:hover {
+ color: #ffffff !important;
+}
+
+.category-option{
+  background-color: #000000 !important;
+  color: #ec4e00 !important;
+  text-transform: uppercase !important;
 }

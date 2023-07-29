@@ -76,7 +76,7 @@ export const getProductById = createAsyncThunk(
   "product/getProductById",
   async (id) => {
     const response = await ProductService.getProductById(id);
-    console.log("get by ID: " ,response)
+    console.log("get Product by ID: " ,response)
     return response;
   }
 );

@@ -6,8 +6,8 @@ import LoginForm from "./component/LoginForm";
 import RegisterPage from "./pages/registerPage";
 
 import AdminProduct from "./pages/adminProduct";
+import Home from "./pages/Home";
 
-const Home = () => <h1>Trang chủ</h1>;
 const About = () => <h1>Giới thiệu</h1>;
 
 function App() {

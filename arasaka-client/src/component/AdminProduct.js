@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import CategoryService from './../service/CategoryService';
 import { Link } from "react-router-dom";
 
-import { getAllProduct, createProduct, getProductById } from "../redux/productSlice";
+import { getAllProduct, createProduct } from "../redux/productSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { status as dataStatus } from "../utils/dataStatus";
 import axios from "axios";
@@ -82,6 +82,11 @@ const onSubmitCreateProduct = async (e) =>{
   }
 }
 
+function clearFormById() {
+  document.getElementById("productForm").reset();
+  document.getElementById("productForm").ariaExpanded = false; 
+}
+
   useEffect(() => {
     getAllCategory();
     dispatch(getAllProduct());
@@ -90,6 +95,7 @@ const onSubmitCreateProduct = async (e) =>{
     } else if (status === dataStatus.SUCCESS) {
       setNotifi("create success");
       setIsFormOpen(false);
+      clearFormById();
     } else if (status === dataStatus.ERROR) {
       setNotifi("some Error");
     }
@@ -112,7 +118,7 @@ const onSubmitCreateProduct = async (e) =>{
           style={{ padding: "10px" }}
         />
         <button
-          className="btn btn-primary"
+          className="customButton"
           type="button"
           data-bs-toggle="collapse"
           data-bs-target="#collapseExample"
@@ -194,10 +200,14 @@ const onSubmitCreateProduct = async (e) =>{
                   onChange={(e) => {
                     setCategoryId(e.target.value);
                   }}
-                  className="form-select newProduct-input"
+                  className="newProduct-input"
                   aria-label="Default select example"
                 >
-                  <option value={0} style={{ color: "black" }}>
+                  <option
+                    className="category-option"
+                    value={0}
+                    style={{ color: "black" }}
+                  >
                     What type?
                   </option>
 
@@ -205,11 +215,13 @@ const onSubmitCreateProduct = async (e) =>{
                     category.map((item) => {
                       return (
                         <option
+                          className="category-option"
                           style={{ color: "black" }}
                           key={item.id}
                           value={item.id}
                         >
                           {item.name}
+                          <hr />
                         </option>
                       );
                     })
@@ -277,7 +289,10 @@ const onSubmitCreateProduct = async (e) =>{
                 <tr key={product.id}>
                   <th scope="row">{product.id}</th>
                   <td>
-                    <Link className="product-link" to={"/admin/product/" + product.id}>
+                    <Link
+                      className="product-link"
+                      to={"/admin/product/" + product.id}
+                    >
                       {product.name}
                     </Link>
                   </td>

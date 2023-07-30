@@ -1,15 +1,19 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap'); */
-*{
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    position: relative;
-    color: #ffff;
-    font-weight: 500;
-    /* Ẩn thanh cuộn dọc */
-    /* overflow-y: hidden !important; */
+/**
+ * @format
+ * @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+ */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  position: relative;
+  color: #ffff;
+  font-weight: 500;
+  /* Ẩn thanh cuộn dọc */
+  /* overflow-y: hidden !important; */
 }
-*::selection{
+*::selection {
   background-color: #ec4f00;
   color: #000000;
 }
@@ -17,30 +21,32 @@
 body {
   overflow-y: hidden !important; /* Ẩn thanh cuộn dọc */
   /* back-ground for all pages */
-  background-color: #111111 !important; 
+  background-color: #111111 !important;
 }
 
-h1, h2, h3, h6{
-    color: #ffffff !important;
-    font-weight: 600 !important;
-    letter-spacing: -.03em !important;
-    font-family: 'Rajdhani', sans-serif !important;
+h1,
+h2,
+h3,
+h6 {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.03em !important;
+  font-family: "Rajdhani", sans-serif !important;
 }
-h4{
-    color: #ffffff !important;
-    font-weight: 600 !important;
-    letter-spacing: -.03em !important;
-    font-family: 'Rajdhani', sans-serif !important;
-    margin: 0 !important;
+h4 {
+  color: #ffffff !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.03em !important;
+  font-family: "Rajdhani", sans-serif !important;
+  margin: 0 !important;
 }
 
-
-hr{
-    background-color: #ec4e00 !important;
-    color: #ec4f00 !important;
-    height: 2px !important;
-    opacity: 100 !important;
-    margin-top: -5px !important;
+hr {
+  background-color: #ec4e00 !important;
+  color: #ec4f00 !important;
+  height: 2px !important;
+  opacity: 100 !important;
+  margin-top: -5px !important;
 }
 
 .background-video {
@@ -58,209 +64,247 @@ hr{
   object-fit: fill;
 }
 
-.sideBar{
-    height: 100vh;
-    padding: 10px 20px 10px 20px !important;
-    border-right: 1px solid rgb(255, 255, 255);
+.sideBar {
+  height: 100vh;
+  padding: 10px 20px 10px 20px !important;
+  border-right: 1px solid rgb(255, 255, 255);
 }
 
-.content{
-    padding: 10px 20px 10px 20px !important;
-    background-color: #0000003c;
+.content {
+  padding: 10px 20px 10px 20px !important;
+  background-color: #0000003c;
 }
 
 .product {
-	height: 70vh; /* Định dạng chiều cao của thẻ div */
-	overflow-y: scroll !important;
+  height: 70vh; /* Định dạng chiều cao của thẻ div */
+  overflow-y: scroll !important;
 }
 /* width */
 ::-webkit-scrollbar {
-	width: 10px;
+  width: 10px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-	background: #f1f1f1;
+  background: #f1f1f1;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-	background: #888;
+  background: #888;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-	background: #555;
+  background: #555;
 }
 
-.productSession{
+.productSession {
   position: relative;
 }
 
-.sort{
+.sort {
   align-items: center !important;
 }
 /* collapse Form */
 .collapse {
-
   &:not(.show) {
     display: none;
   }
-  
 }
 
 .collapsing {
   height: 0;
   overflow: hidden;
-  
 }
 
-.card-body{
-  color: #ffffff;  
+.card-body {
+  color: #ffffff;
   background-color: rgba(0, 0, 0, 0.796) !important ;
   border: 2px solid #ec4f00 !important;
   border-radius: 0% !important;
 }
-.newProduct-input{
+.newProduct-input {
   width: 100% !important;
-  color: #ffffff !important;  
+  color: #ffffff !important;
   background-color: #00000000 !important;
   padding: 8px !important;
   border: 0.5px solid #ffffff !important;
 }
 .newProduct-input::placeholder {
-  color: #ffffff !important;  
+  color: #ffffff !important;
 }
-.newProduct-input:focus{
+.newProduct-input:focus {
   border: 2px solid #ec4f00 !important;
 }
 
-.product-link{
+.product-link {
   text-decoration: none;
   color: #ec4f00;
   font-weight: 600;
 }
 
-.product-link:hover{
+.product-link:hover {
   color: #ffffff;
   transform: translate(5px, 12px) !important;
 }
 
-.detail-product-title{
+.detail-product-title {
   color: #ec4f00 !important;
   font-weight: 600 !important;
-  letter-spacing: -.03em !important;
-  font-family: 'Rajdhani', sans-serif !important;
+  letter-spacing: -0.03em !important;
+  font-family: "Rajdhani", sans-serif !important;
   text-transform: uppercase !important;
-  letter-spacing: .12em !important;
+  letter-spacing: 0.12em !important;
 }
-.detail-product-title-1{
+.detail-product-title-1 {
   color: #ffffff !important;
   font-weight: 600 !important;
-  letter-spacing: -.03em !important;
-  font-family: 'Rajdhani', sans-serif !important;
+  letter-spacing: -0.03em !important;
+  font-family: "Rajdhani", sans-serif !important;
   text-transform: uppercase !important;
-  letter-spacing: .12em !important;
+  letter-spacing: 0.12em !important;
 }
 
-.detail-product-img{
+.detail-product-img {
   border: 1px solid #ffffffa3 !important;
 }
 
-.detail-product-name{
-    font-size: 60px !important;
-    line-height: 1em !important;
-    font-weight: 700 !important;
-    text-transform: uppercase !important;
-  }
-
-.detail-product-price{
-    letter-spacing: -.04em !important;
-    font-weight: 700 !important;
-    font-family: Rajdhani,sans-serif !important;
-    font-size: 50px !important;
-    line-height: 1em !important;
+.detail-product-name {
+  font-size: 60px !important;
+  line-height: 1em !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
 }
 
-.product-detail-desc{
+.detail-product-price {
+  letter-spacing: -0.04em !important;
+  font-weight: 700 !important;
+  font-family: Rajdhani, sans-serif !important;
+  font-size: 50px !important;
+  line-height: 1em !important;
+}
+
+.product-detail-desc {
   margin-top: 30px !important;
 }
 
-.star{
+.star {
   color: #ec4f00 !important;
   font-size: 32px !important;
   line-height: 60% !important;
 }
 
-.customer-reviews{
+.customer-reviews {
   font-size: 18px !important;
   font-weight: 350;
 }
 
-.product-detail-desc{
+.product-detail-desc {
   margin-top: 20px !important;
   font-weight: 300 !important;
   font-size: 18px !important;
-  font-family: "Roboto Condensed",sans-serif !important;
+  font-family: "Roboto Condensed", sans-serif !important;
   text-align: justify !important;
 }
 
-.detail-product-main{
+.detail-product-main {
   background-color: #00000064 !important;
 }
 
-.detail-product-category{
+.detail-product-category {
   color: #ec4e00 !important;
-    font-weight: 600 !important;
-    letter-spacing: -.03em !important;
-    font-family: 'Rajdhani', sans-serif !important;
-    margin: 0 !important;
-    text-transform: uppercase !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.03em !important;
+  font-family: "Rajdhani", sans-serif !important;
+  margin: 0 !important;
+  text-transform: uppercase !important;
 }
 
-.class{
+.class {
   margin-bottom: 17px !important;
 }
 
 /* button effect */
 .customButton {
- padding: 0.6em 1.6em !important;
- border: 2px solid #ec4e00 !important;
- overflow: hidden !important;
- background-color: transparent !important;
- text-align: center !important;
- text-transform: uppercase !important;
- font-size: 18px !important;
- transition: .3s !important;
- z-index: 1 !important;
- font-family: 'Rajdhani', sans-serif !important;
+  padding: 0.6em 1.6em !important;
+  border: 2px solid #ec4e00 !important;
+  overflow: hidden !important;
+  background-color: transparent !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
+  font-size: 18px !important;
+  transition: 0.3s !important;
+  z-index: 1 !important;
+  font-family: "Rajdhani", sans-serif !important;
 
- color: #ec4e00 !important;
+  color: #ec4e00 !important;
 }
 
 .customButton::before {
- content: '' !important;
- width: 0 !important;
- height: 300% !important;
- position: absolute !important;
- top: 50% !important;
- left: 50% !important;
- transform: translate(-50%, -50%) rotate(180deg) !important;
- background: #ec4e00 !important;
- transition: .5s ease !important;
- display: block !important;
- z-index: -1 !important;
+  content: "" !important;
+  width: 0 !important;
+  height: 300% !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) rotate(180deg) !important;
+  background: #ec4e00 !important;
+  transition: 0.5s ease !important;
+  display: block !important;
+  z-index: -1 !important;
 }
 
 .customButton:hover::before {
- width: 205% !important;
+  width: 205% !important;
 }
 
 .customButton:hover {
- color: #ffffff !important;
+  color: #ffffff !important;
 }
 
-.category-option{
+/* button effect */
+.customButton2 {
+  padding: 0.6em 1.6em !important;
+  border: 2px solid #ffffff !important;
+  overflow: hidden !important;
+  background-color: transparent !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  transition: 0.3s !important;
+  z-index: 1 !important;
+  font-family: "Rajdhani", sans-serif !important;
+
+  color: #ffffff !important;
+}
+
+.customButton2::before {
+  content: "" !important;
+  width: 0 !important;
+  height: 300% !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) rotate(180deg) !important;
+  background: #ec4e00 !important;
+  transition: 0.5s ease !important;
+  display: block !important;
+  z-index: -1 !important;
+}
+
+.customButton2:hover::before {
+  width: 205% !important;
+}
+
+.customButton2:hover {
+  color: #000000 !important;
+  font-weight: 600 !important;
+  border: 2px solid #3e3e3e !important;
+}
+
+.category-option {
   background-color: #000000 !important;
   color: #ec4e00 !important;
   text-transform: uppercase !important;

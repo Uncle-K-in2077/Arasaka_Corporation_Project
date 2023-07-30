@@ -38,6 +38,7 @@ public class ProductConverter {
 	public ProductDTO toDTO(Product entity) {
 		ProductDTO dto = new ProductDTO();
 		
+		dto.setCategoryName(entity.getCategory().getName());
         dto.setId(entity.getId());
         dto.setQuantity(entity.getQuantity());
         dto.setCreatedAt(formatDate(entity.getCreatedAt()));
@@ -53,7 +54,9 @@ public class ProductConverter {
 	
 	// Chuyển đổi kiểu Date thành String
 	private static String formatDate(Date date) {
+		
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+        
         return dateFormat.format(date);
     }
 

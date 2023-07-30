@@ -1,106 +1,64 @@
-import { useEffect, useState } from "react";
-// import ProductService from './../service/ProductService';
-import CategoryService from './../service/CategoryService';
+/** @format */
+
+import { useState } from "react";
 import { Link } from "react-router-dom";
-
-import { getAllProduct, createProduct } from "../redux/productSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { status as dataStatus } from "../utils/dataStatus";
-import axios from "axios";
-
+import { createProduct } from "../redux/productSlice";
+// import { updating } from "../redux/productSlice";
 
 function AdminProduct() {
+  const productData = useSelector((state) => state.product.data);
 
+  const categoryData = useSelector((state) => state.category.data);
 
-  const [category,setCategory] = useState([]);
-  const [categoryId, setCategoryId] = useState(0);
-  //data for new product
-  const [name, setName] = useState("");
-  const [price, setPrice] = useState("");
-  const [quantity, setQuantity] = useState("");
-  // const [image, setImage] = useState("");
-  // const [selectedImageFile, setSelectedImageFile] = useState({});
+  const [file, setFile] = useState({});
 
-  const [description, setDescription] = useState("");
+  const [product, setProduct] = useState({
+    id: 0,
+    description: "",
+    image: "",
+    name: "",
+    price: 0,
+    quantity: 0,
+    saleStatus: 0,
+    status: 1,
+    categoryId: 0,
+    createdAt: new Date(),
+  });
+
+  // const setProductEdit = (id) => {
+  //   dispatch(updating(id));
+  // };
+
+  const handleChangeProduct = (e) => {
+    const { name, value } = e.target;
+    setProduct((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
   const [notifi, setNotifi] = useState("");
   const [isFormOpen, setIsFormOpen] = useState(false);
 
-  const dispatch  = useDispatch();
+  const dispatch = useDispatch();
 
-  const { data: products, createdProduct, status} = useSelector(
-    (state) => state.product
-  );
+  const onSubmitCreateProduct = async (e) => {
+    e.preventDefault();
+    try {
+      const formData = new FormData();
+      formData.append("product", JSON.stringify(product));
+      formData.append("img", file);
+      dispatch(createProduct(formData));
 
-
-async function getAllCategory() {
-  try {
-    const res = await CategoryService.findAll();
-    if (res) {
-      setCategory(res.data);
+      const canelBtn = document.querySelector("#canelBtn");
+      canelBtn.click();
+      setNotifi("");
+    } catch (error) {
+      setNotifi("Something wrong happened");
+      console.error("Error uploading image", error);
     }
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-const onSubmitCreateProduct = async (e) =>{
-  e.preventDefault();
-
-  const form = document.getElementById("productForm");
-  const formData = new FormData(form);
-
-  try {
-    const response = await axios.post(
-      // Ở đây phải dùng api raw và axios vì AxiosService đã có header sẵn và không nhận multipart :<
-      "http://localhost:8080/api/upload",
-      formData,
-      {
-        Headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
-    );
-      console.log("response",response);
-    // Lấy URL của ảnh tải lên từ phản hồi
-    const imageUrl = response.data;
-    console.log("link anh: ",imageUrl)
-
-    const productData = {
-      name,
-      price,
-      quantity,
-      image: imageUrl,
-      categoryId,
-      description,
-    };
-
-
-    dispatch(createProduct(productData));
-  } catch (error) {
-    // Xử lý lỗi khi tải lên ảnh
-    console.error("Error uploading image", error);
-  }
-}
-
-function clearFormById() {
-  document.getElementById("productForm").reset();
-  document.getElementById("productForm").ariaExpanded = false; 
-}
-
-  useEffect(() => {
-    getAllCategory();
-    dispatch(getAllProduct());
-    if (status === dataStatus.LOADING) {
-      setNotifi("loading...");
-    } else if (status === dataStatus.SUCCESS) {
-      setNotifi("create success");
-      setIsFormOpen(false);
-      clearFormById();
-    } else if (status === dataStatus.ERROR) {
-      setNotifi("some Error");
-    }
-  }, [status, createdProduct, dispatch]);
-
+  };
 
   return (
     <div className="productSession">
@@ -136,7 +94,7 @@ function clearFormById() {
             marginBottom: "-10px",
           }}
         >
-          {notifi}
+          {notifi ? notifi : <></>}
         </p>
       </div>
 
@@ -149,57 +107,66 @@ function clearFormById() {
           encType="multipart/form-data"
           onSubmit={onSubmitCreateProduct}
         >
-          <div
-            className="card card-body"
-            // style={{ backgroundColor: "#99999928" }}
-          >
+          <div className="card card-body">
             <input type="hidden" name="image" />
             <div className="row">
               <div className="col-6">
                 <input
+                  onChange={handleChangeProduct}
                   required
                   className="newProduct-input"
                   type="text"
+                  value={product.name}
                   name="name"
                   placeholder="Name"
-                  onChange={(e) => setName(e.target.value)}
                 />
               </div>
               <div className="col-6">
                 <input
+                  onChange={handleChangeProduct}
                   required
                   className="newProduct-input"
                   type="number"
+                  value={product.price}
                   placeholder="Price"
-                  onChange={(e) => setPrice(e.target.value)}
+                  name="price"
                 />
               </div>
 
               <div className="col-4" style={{ marginTop: "15px" }}>
                 <input
+                  value={product.quantity}
                   required
+                  onChange={handleChangeProduct}
                   className="newProduct-input"
                   type="number"
                   placeholder="Stock"
-                  onChange={(e) => setQuantity(e.target.value)}
+                  name="quantity"
                 />
               </div>
               <div className="col-4" style={{ marginTop: "15px" }}>
                 <input
                   required
+                  onChange={(e) => {
+                    setFile(e.target.files[0]);
+                  }}
                   className="newProduct-input"
                   type="file"
                   name="img"
                   placeholder="Image"
-                  // onChange={(e) => setSelectedImageFile(e.target.files[0])}
                 />
               </div>
 
               <div className="col-4" style={{ marginTop: "15px" }}>
                 <select
+                  defaultValue={product.categoryId}
                   onChange={(e) => {
-                    setCategoryId(e.target.value);
+                    setProduct({
+                      ...product,
+                      categoryId: Number(e.target.value),
+                    });
                   }}
+                  name="categoryId"
                   className="newProduct-input"
                   aria-label="Default select example"
                 >
@@ -211,8 +178,8 @@ function clearFormById() {
                     What type?
                   </option>
 
-                  {category ? (
-                    category.map((item) => {
+                  {categoryData ? (
+                    categoryData.map((item) => {
                       return (
                         <option
                           className="category-option"
@@ -221,13 +188,12 @@ function clearFormById() {
                           value={item.id}
                         >
                           {item.name}
-                          <hr />
                         </option>
                       );
                     })
                   ) : (
                     <>
-                      <p>No Category found</p>
+                      <>No Category found</>
                     </>
                   )}
                 </select>
@@ -236,7 +202,9 @@ function clearFormById() {
               <div className="col-12" style={{ marginTop: "15px" }}>
                 <textarea
                   className="newProduct-input"
-                  onChange={(e) => setDescription(e.target.value)}
+                  name="description"
+                  value={product.description}
+                  onChange={handleChangeProduct}
                 />
               </div>
 
@@ -247,6 +215,7 @@ function clearFormById() {
               </div>
               <div className="col-6" style={{ marginTop: "15px" }}>
                 <button
+                  id="canelBtn"
                   type="reset"
                   className="newProduct-input"
                   data-bs-toggle="collapse"
@@ -284,27 +253,21 @@ function clearFormById() {
             </tr>
           </thead>
           <tbody>
-            {products && Array.isArray(products) ? (
-              products.map((product) => (
+            {productData && Array.isArray(productData) ? (
+              productData.map((product) => (
                 <tr key={product.id}>
                   <th scope="row">{product.id}</th>
                   <td>
                     <Link
+                      // onClick={() => {
+                      //   setProductEdit(product.id);
+                      // }}
                       className="product-link"
                       to={"/admin/product/" + product.id}
                     >
                       {product.name}
                     </Link>
                   </td>
-
-                  {/* <td>
-                    <button
-                      className="product-link" // Classname có thể được tùy chỉnh cho phù hợp với giao diện của bạn
-                      onClick={() => dispatch(getProductById(product.id))}
-                    >
-                      {product.name}
-                    </button>
-                  </td> */}
 
                   <td>{product.price}</td>
                   <td>{product.categoryId}</td>

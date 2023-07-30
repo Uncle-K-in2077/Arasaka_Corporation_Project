@@ -37,21 +37,7 @@ function RegisterPage() {
     dispatch(registerAccount(accountData));
   };
 
-  // const notificationByStatus = (status) =>{
-  //     if (status === "loading") {
-  //       setError("Please wait...");
-  //     }
-
-  //     if (status === "error") {
-  //       setError("Email already registered");
-  //     }
-
-  //     if (status === "idle") {
-  //       setError("Register success");
-  //       console.log(registeredAccount.currentUser);
-  //       console.log(registeredAccount.token);
-  //     }
-  // }
+ 
 
     useEffect(() => {
       // Xử lý thông báo dựa trên status khi có sự thay đổi

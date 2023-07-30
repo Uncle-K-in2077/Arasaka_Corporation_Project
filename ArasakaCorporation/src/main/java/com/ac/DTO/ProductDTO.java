@@ -1,6 +1,5 @@
 package com.ac.DTO;
 
-
 import lombok.Data;
 
 @Data
@@ -10,6 +9,7 @@ public class ProductDTO {
     private String description;
     private String image;
     private String name;
+    private String categoryName;
     private double price;
     private int quantity;
     private int saleStatus;

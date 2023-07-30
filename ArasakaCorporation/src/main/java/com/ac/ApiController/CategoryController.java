@@ -47,8 +47,6 @@ public class CategoryController {
 	@Autowired
 	CategoryRepository categoryRepository;
 	
-	@Autowired
-	CategoryConverter categoryConverter;
 	
 	@Autowired
 	HttpServletRequest request;
@@ -59,7 +57,7 @@ public class CategoryController {
 		List<CategoryDTO> listDTO = new ArrayList<>();
 		if(categoryList.size()>0) {
 			for(Category item : categoryList) {
-				listDTO.add(categoryConverter.toDTO(item));
+				listDTO.add(CategoryConverter.toDTO(item));
 			}
 		}
 		return listDTO;

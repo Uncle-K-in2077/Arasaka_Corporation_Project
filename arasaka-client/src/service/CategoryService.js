@@ -33,6 +33,15 @@ const CategoryService = {
       throw error;
     }
   },
+
+  async createCategory(categoryData) {
+    try {
+      const response = await AxiosService.post("category", categoryData);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 export default CategoryService;

@@ -108,7 +108,12 @@ public class CategoryController {
 			Optional<Category> category = categoryRepository.findById(id);
 			if(category.isPresent()) {
 				Category updateCategory = category.get();
-				updateCategory.setName(categoryDTO.getName());
+				
+				if(categoryDTO.getName().equals("") || categoryDTO.getName().isEmpty() || categoryDTO.getName().isBlank()) {
+					updateCategory.setName(category.get().getName());
+				}else {					
+					updateCategory.setName(categoryDTO.getName());
+				}
 				updateCategory.setStatus(categoryDTO.getStatus());
 				
 				Category updatedCategory = categoryRepository.save(updateCategory);

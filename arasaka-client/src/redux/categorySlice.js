@@ -41,9 +41,27 @@ const categorySlice = createSlice({
       })
       .addCase(updateCategory.fulfilled, (state, action) => {
         state.status = dataStatus.SUCCESS;
-        state.data = action.payload;
+        const cate = action.payload;
+        const index = state.data.findIndex((item) => item.id === cate.id);
+        if (index !== -1) {
+          state.data[index] = { ...state.data[index], ...cate };
+        } else {
+          state.data.push(cate);
+        }
       })
       .addCase(updateCategory.rejected, (state, action) => {
+        state.status = dataStatus.ERROR;
+        state.data = null;
+      })
+
+      .addCase(createCategory.pending, (state) => {
+        state.status = dataStatus.LOADING;
+      })
+      .addCase(createCategory.fulfilled, (state, action) => {
+        state.status = dataStatus.SUCCESS;
+        state.data.unshift(action.payload);
+      })
+      .addCase(createCategory.rejected, (state, action) => {
         state.status = dataStatus.ERROR;
         state.data = null;
       });
@@ -72,12 +90,24 @@ export const getCategories = createAsyncThunk(
 
 export const updateCategory = createAsyncThunk(
   "category/updateCategory",
-  async ({ categoryId, categoryData }, thunkAPI) => {
+  async ({ categoryId, name, status }, thunkAPI) => {
     try {
-      const response = await CategoryService.updateCategory(
-        categoryId,
-        categoryData
-      );
+      const response = await CategoryService.updateCategory(categoryId, {
+        name,
+        status,
+      });
+      return response.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+export const createCategory = createAsyncThunk(
+  "category/createCategory",
+  async ({ name, status }, thunkAPI) => {
+    try {
+      const response = await CategoryService.createCategory({ name, status });
       return response.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

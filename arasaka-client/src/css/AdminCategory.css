@@ -20,3 +20,7 @@
   padding: 8px !important;
   border: 0.5px solid #ffffff !important;
 }
+.category-main {
+  height: 88vh; /* Định dạng chiều cao của thẻ div */
+  overflow-y: scroll !important;
+}

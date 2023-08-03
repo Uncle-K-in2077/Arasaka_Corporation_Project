@@ -6,8 +6,8 @@ import com.ac.DTO.CategoryDTO;
 import com.ac.Entities.Category;
 
 @Component
-public class CategoryConverter {
-	public static CategoryDTO toDTO(Category category) {
+	public class CategoryConverter {
+	public CategoryDTO toDTO(Category category) {
         CategoryDTO categoryDTO = new CategoryDTO();
         categoryDTO.setId(category.getId());
         categoryDTO.setName(category.getName());
@@ -16,7 +16,7 @@ public class CategoryConverter {
         return categoryDTO;
     }
 
-    public static Category toEntity(CategoryDTO categoryDTO) {
+    public Category toEntity(CategoryDTO categoryDTO) {
         Category category = new Category();
         category.setId(categoryDTO.getId());
         category.setName(categoryDTO.getName());

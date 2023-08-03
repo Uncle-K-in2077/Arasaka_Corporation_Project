@@ -5,17 +5,45 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import ProductService from "../service/ProductService";
 import { updateProduct } from "../redux/productSlice";
+import { removeProduct, restoreProduct } from "../redux/productSlice";
+import { useNavigate } from "react-router-dom";
+import Toast from "./Toast";
 
 function AdminProductDetail() {
   const { id } = useParams("id");
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const [notifi, setNotifi] = useState("");
   const [file, setFile] = useState({});
 
-  const [product, setProduct] = useState({});
+  const [product, setProduct] = useState();
+  // const [productUI, setProductUI] = useState({});
+  // const [productForm, setProductForm] = useState({});
   const category = useSelector((state) => state.category.data);
+
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
+
+  const [openForm, setOpenForm] = useState(false);
+
+  const handleOpenForm = () => {
+    if (openForm) {
+      setOpenForm(false);
+    } else {
+      setOpenForm(true);
+    }
+  };
+
+  const handleShowToast = (message) => {
+    setShowToast(false);
+    setToastMessage(message);
+    setTimeout(() => {
+      setShowToast(false);
+      setToastMessage("");
+    }, 3000);
+  };
 
   const getProduct = async () => {
     try {
@@ -47,17 +75,55 @@ function AdminProductDetail() {
 
   const handleSubmitUpdate = async (e) => {
     e.preventDefault();
+
+    if (product.price === 0) {
+      setToastMessage("Price must be greater than 0");
+      setShowToast(true);
+      return;
+    } else {
+      try {
+        const formData = new FormData();
+        formData.append("product", JSON.stringify(product));
+        formData.append("img", file);
+        dispatch(updateProduct({ productId: product.id, formData: formData }));
+
+        const cancelBtn = document.querySelector("#cancelBtn");
+        cancelBtn.click();
+        setNotifi("");
+        setToastMessage("Update success");
+        setShowToast(true);
+        navigate(`/admin/product/${product.id}`);
+      } catch (error) {
+        setNotifi("Error on updating product");
+        handleShowToast("Update fail");
+        setShowToast(true);
+      }
+    }
+  };
+
+  // Hàm xử lý sự kiện khi bạn muốn xóa sản phẩm
+  const handleRemoveProduct = async () => {
     try {
-      const formData = new FormData();
-      formData.append("product", JSON.stringify(product));
-      formData.append("img", file);
-      dispatch(updateProduct({ id: product.id, formData: formData }));
-      const cancelBtn = document.querySelector("#cancelBtn");
-      cancelBtn.click();
-      setNotifi("");
+      await dispatch(removeProduct(product.id));
+      // Xử lý sau khi xóa thành công (nếu cần)
+      console.log("Product removed successfully");
+      navigate("/admin/product");
     } catch (error) {
-      setNotifi("Error on updating product");
-      console.log("Update Fail", error);
+      // Xử lý khi xảy ra lỗi trong quá trình xóa (nếu cần)
+      console.log("Error removing product:", error);
+    }
+  };
+
+  // Hàm xử lý sự kiện khi bạn muốn phục hồi sản phẩm
+  const handleRestoreProduct = async () => {
+    try {
+      await dispatch(restoreProduct(product.id));
+      // Xử lý sau khi phục hồi thành công (nếu cần)
+      console.log("Product restored successfully");
+      navigate("/admin/product");
+    } catch (error) {
+      // Xử lý khi xảy ra lỗi trong quá trình phục hồi (nếu cần)
+      console.log("Error restoring product:", error);
     }
   };
 
@@ -227,23 +293,36 @@ function AdminProductDetail() {
               </div>
               <span className="customer-reviews">77 customer reviews</span>
 
-              <p className="product-detail-desc">{product.description}</p>
+              <p
+                className="product-detail-desc p-0.5"
+                style={{ wordWrap: "break-word" }}
+              >
+                {product.description}
+              </p>
 
               <div className="class">
                 <h4>
                   AS-ID:{" "}
                   <span className="detail-product-category">{product.id}</span>
                 </h4>
+                {/* Status: Remove or Restore */}
                 <h4>
-                  CATEGORY:{" "}
-                  <span className="detail-product-category">
-                    {product.categoryName}
-                  </span>
+                  <input
+                    type="checkbox"
+                    className="switch"
+                    defaultChecked={product.status}
+                    onChange={
+                      product.status
+                        ? handleRemoveProduct
+                        : handleRestoreProduct
+                    }
+                  />
                 </h4>
               </div>
               <button
                 className="customButton"
                 type="button"
+                onClick={handleOpenForm}
                 data-bs-toggle="collapse"
                 data-bs-target="#collapseExample"
                 aria-expanded="false"
@@ -252,6 +331,12 @@ function AdminProductDetail() {
                 Button with data-bs-target
               </button>
             </div>
+            {/* Show Toast */}
+            {showToast ? (
+              <Toast title="Notification" message={toastMessage} />
+            ) : (
+              ""
+            )}
           </div>
         </div>
       </div>

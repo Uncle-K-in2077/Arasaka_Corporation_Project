@@ -1,0 +1,12 @@
+/** @format */
+
+.product-img {
+  width: 299px !important;
+  height: 299px !important;
+}
+.product-img:hover {
+  border: 2px solid #fe5000 !important;
+}
+a {
+  text-decoration: none !important;
+}

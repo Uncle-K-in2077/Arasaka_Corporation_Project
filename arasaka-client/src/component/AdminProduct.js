@@ -1,17 +1,29 @@
 /** @format */
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { createProduct } from "../redux/productSlice";
 // import { updating } from "../redux/productSlice";
+import { status } from "./../utils/dataStatus";
 
 function AdminProduct() {
   const productData = useSelector((state) => state.product.data);
+  console.log("data: ", productData);
 
   const categoryData = useSelector((state) => state.category.data);
 
   const [file, setFile] = useState({});
+
+  const formatDate = (date) => {
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const formattedDay = day < 10 ? "0" + day : day;
+    const formattedMonth = month < 10 ? "0" + month : month;
+    const formattedDate = `${formattedDay}-${formattedMonth}-${year}`;
+    return formattedDate;
+  };
 
   const [product, setProduct] = useState({
     id: 0,
@@ -23,7 +35,7 @@ function AdminProduct() {
     saleStatus: 0,
     status: 1,
     categoryId: 0,
-    createdAt: new Date(),
+    createdAt: formatDate(new Date()),
   });
 
   // const setProductEdit = (id) => {
@@ -39,9 +51,14 @@ function AdminProduct() {
   };
 
   const [notifi, setNotifi] = useState("");
-  const [isFormOpen, setIsFormOpen] = useState(false);
 
   const dispatch = useDispatch();
+
+  const [filter, setFilter] = useState({
+    searchText: "",
+    categoryId: 0,
+    status: 2,
+  });
 
   const onSubmitCreateProduct = async (e) => {
     e.preventDefault();
@@ -59,6 +76,14 @@ function AdminProduct() {
       console.error("Error uploading image", error);
     }
   };
+  const handleChangeFilter = (e) => {
+    const { name, value } = e.target;
+    setFilter((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+  useEffect(() => {});
 
   return (
     <div className="productSession">
@@ -66,36 +91,103 @@ function AdminProduct() {
       <hr />
 
       <div className="sort" style={{ display: "flex" }}>
-        <h4>Sort</h4>
-        <input
-          required
-          type="text"
-          name=""
-          id=""
-          placeholder="Finding something?"
-          style={{ padding: "10px" }}
-        />
-        <button
-          className="customButton"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#collapseExample"
-          aria-expanded="false"
-          aria-controls="collapseExample"
-          onClick={() => setIsFormOpen(!isFormOpen)} // Thay đổi trạng thái mở/đóng form khi nhấn nút
-        >
-          New Product +
-        </button>
+        <div className="col-lg-9 filter">
+          <input
+            value={filter.searchText}
+            onChange={handleChangeFilter}
+            type="text"
+            name="searchText"
+            placeholder="Finding something?"
+            className="filter-search"
+          />
 
-        <p
-          style={{
-            color: "#FE5000",
-            marginTop: "-10px",
-            marginBottom: "-10px",
-          }}
-        >
-          {notifi ? notifi : <></>}
-        </p>
+          <select
+            defaultValue={Number(filter.categoryId)}
+            onChange={handleChangeFilter}
+            value={filter.categoryId}
+            name="categoryId"
+            className="filter-select"
+            aria-label="Default select example"
+          >
+            <option
+              className="category-option"
+              style={{ color: "black" }}
+              value={0}
+            >
+              All Category
+            </option>
+            {categoryData ? (
+              categoryData.map((item) => {
+                return (
+                  <option
+                    className="category-option"
+                    style={{ color: "black" }}
+                    key={item.id}
+                    value={item.id}
+                  >
+                    {item.name}
+                  </option>
+                );
+              })
+            ) : (
+              <>
+                <>No Category found</>
+              </>
+            )}
+          </select>
+          <select
+            defaultValue={0}
+            onChange={handleChangeFilter}
+            value={filter.status}
+            name="status"
+            className="filter-select"
+            aria-label="Default select example"
+          >
+            <option
+              className="category-option"
+              style={{ color: "black" }}
+              value={2}
+            >
+              Status
+            </option>
+            <option
+              className="category-option"
+              style={{ color: "black" }}
+              value={1}
+            >
+              Online
+            </option>
+            <option
+              className="category-option"
+              style={{ color: "black" }}
+              value={0}
+            >
+              Offline
+            </option>
+          </select>
+        </div>
+
+        <div className="col-lg-3">
+          <button
+            className="customButton"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseExample"
+            aria-expanded="false"
+            aria-controls="collapseExample"
+          >
+            New Product +
+          </button>
+          <p
+            style={{
+              color: "#FE5000",
+              marginTop: "-10px",
+              marginBottom: "-10px",
+            }}
+          >
+            {notifi ? notifi : <></>}
+          </p>
+        </div>
       </div>
 
       <br />
@@ -170,14 +262,6 @@ function AdminProduct() {
                   className="newProduct-input"
                   aria-label="Default select example"
                 >
-                  <option
-                    className="category-option"
-                    value={0}
-                    style={{ color: "black" }}
-                  >
-                    What type?
-                  </option>
-
                   {categoryData ? (
                     categoryData.map((item) => {
                       return (
@@ -236,14 +320,11 @@ function AdminProduct() {
       {/* Product Table */}
       <div className="product">
         <table
-          className="table table-dark table-border"
-          style={{ opacity: "80%", color: "#FFFF" }}
+          className="table table-dark table-border table-striped"
+          style={{ opacity: "90%", color: "#FFFF" }}
         >
           <thead>
             <tr>
-              <th scope="col" style={{ color: "#FE5000" }}>
-                ID
-              </th>
               <th scope="col">Name</th>
               <th scope="col">Price</th>
               <th scope="col">Category</th>
@@ -253,47 +334,61 @@ function AdminProduct() {
             </tr>
           </thead>
           <tbody>
-            {productData && Array.isArray(productData) ? (
-              productData.map((product) => (
-                <tr key={product.id}>
-                  <th scope="row">{product.id}</th>
-                  <td>
-                    <Link
-                      // onClick={() => {
-                      //   setProductEdit(product.id);
-                      // }}
-                      className="product-link"
-                      to={"/admin/product/" + product.id}
-                    >
-                      {product.name}
-                    </Link>
-                  </td>
+            {productData ? (
+              productData.map((product) => {
+                if (
+                  (filter.searchText === "" ||
+                    product.name
+                      .toLowerCase()
+                      .indexOf(filter.searchText.toLowerCase()) !== -1) &&
+                  (filter.categoryId == 0 ||
+                    filter.categoryId == product.categoryId) &&
+                  (filter.status == 2 || filter.status == product.status)
+                )
+                  return (
+                    <tr key={product.id}>
+                      <td>
+                        Product name:
+                        <Link
+                          // onClick={() => {
+                          //   setProductEdit(product.id);
+                          // }}
+                          className="product-link"
+                          to={"/admin/product/" + product.id}
+                        >
+                          <h5>{product.name}</h5>
+                        </Link>
+                        Price( USD ): <br />
+                        <span className="product-link">{product.price}$</span>
+                      </td>
+                      <td>
+                        <img
+                          style={{ width: "200px" }}
+                          src={"http://localhost:8080/" + product.image}
+                          alt="/"
+                        />
+                      </td>
 
-                  <td>{product.price}</td>
-                  <td>{product.categoryId}</td>
-                  <td
-                    style={{
-                      maxWidth: "200px",
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      whiteSpace: "nowrap",
-                    }}
-                  >
-                    {product.description}
-                  </td>
-                  <td>
-                    <img
-                      style={{ width: "200px" }}
-                      src={"http://localhost:8080/" + product.image}
-                      alt="/"
-                    />
-                  </td>
-                  <td>{product.quantity}</td>
-                </tr>
-              ))
+                      {/* <td>$.{product.price}</td> */}
+                      <td>{product.categoryName}</td>
+                      <td
+                        style={{
+                          maxWidth: "100px",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {product.description}
+                      </td>
+                      <td>{product.quantity}</td>
+                      <td>{product.status}</td>
+                    </tr>
+                  );
+              })
             ) : (
               <tr>
-                <td colSpan="4">No products found</td>
+                <td>No products found</td>
               </tr>
             )}
           </tbody>

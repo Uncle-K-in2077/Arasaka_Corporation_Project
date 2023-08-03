@@ -4,24 +4,30 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import ProductService from "../service/ProductService";
 import { status as dataStatus } from "../utils/dataStatus";
 import axios from "axios";
+import uploadService from "../service/uploadService";
 
 const initialState = {
-  productUpdating: null,
   data: [],
   status: "",
+  error: null,
 };
 
 // create a new product
 export const createProduct = createAsyncThunk(
   "product/createProduct",
-  async (formData) => {
-    // const response = await ProductService.createProduct(productData);
-    const response = await axios.post(
-      "http://localhost:8080/api/product",
-      formData // Truyền formData vào request
-    );
-    const result = await response.data;
-    return result;
+  async (formData, thunkAPI) => {
+    try {
+      const res = await axios.post(
+        process.env.REACT_APP_API_URL + `/product`,
+        formData,
+        {
+          headers: "Content-Type: multipart/form-data",
+        }
+      );
+      return res.data;
+    } catch (error) {
+      thunkAPI.rejectWithValue(error.message);
+    }
   }
 );
 
@@ -50,13 +56,51 @@ export const getProductById = createAsyncThunk(
 // Update product by id
 export const updateProduct = createAsyncThunk(
   "product/updateProduct",
-  async ({ id, formData }) => {
-    const response = await axios.put(
-      `http://localhost:8080/api/product/${id}`,
-      formData
-    );
-    const result = await response.data;
-    return result;
+  async ({ productId, formData }, thunkAPI) => {
+    try {
+      const res = await axios.put(
+        process.env.REACT_APP_API_URL + `/product/${productId}`,
+        formData,
+        {
+          headers: "Content-Type: multipart/form-data",
+        }
+      );
+      return res.data;
+    } catch (error) {
+      thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+//Remove product by id (set Status to 0)
+export const removeProduct = createAsyncThunk(
+  "product/removeProduct",
+  async (idProduct, thunkAPI) => {
+    try {
+      await ProductService.deleteProduct(idProduct);
+      console.log("remove success");
+      getProducts();
+      return idProduct;
+    } catch (error) {
+      console.log(error.message);
+      thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+//Restore product by id (set Status to 1 again)
+export const restoreProduct = createAsyncThunk(
+  "product/restoreProduct",
+  async (idProduct, thunkAPI) => {
+    try {
+      await ProductService.restoreProduct(idProduct);
+      console.log("restore success");
+      getProducts();
+      return idProduct;
+    } catch (error) {
+      console.log(error.message);
+      thunkAPI.rejectWithValue(error.message);
+    }
   }
 );
 
@@ -67,14 +111,19 @@ const productSlice = createSlice({
     setProducts(state, action) {
       state.data = action.payload;
     },
-    findById(state, action) {
-      return state.data.find((item) => item.id === action.payload);
-    },
-    updating(state, action) {
-      state.productUpdating = state.data.find(
-        (item) => item.id === action.payload
-      );
-    },
+    // findById(state, action) {
+    //   return state.data.find((item) => item.id === action.payload);
+    // },
+    // updating(state, action) {
+    //   state.productUpdating = state.data.find(
+    //     (item) => item.id === action.payload
+    //   );
+    // },
+    // updateProductSuccess: (state, action) => {
+    //   state.data = action.payload;
+    //   state.status = "success";
+    //   state.error = null;
+    // },
   },
   extraReducers: (builder) => {
     builder
@@ -95,8 +144,7 @@ const productSlice = createSlice({
       })
       .addCase(createProduct.fulfilled, (state, action) => {
         state.status = dataStatus.SUCCESS;
-
-        state.data.push(action.payload);
+        state.data.unshift(action.payload);
       })
       .addCase(createProduct.rejected, (state, action) => {
         state.status = dataStatus.ERROR;
@@ -120,14 +168,40 @@ const productSlice = createSlice({
       })
       .addCase(updateProduct.fulfilled, (state, action) => {
         state.status = dataStatus.SUCCESS;
-        state.data = action.payload;
+        const product = action.payload;
+        const index = state.data.findIndex((item) => item.id === product.id);
+        if (index !== -1) {
+          state.data[index] = { ...state.data[index], ...product };
+        } else {
+          state.data.push(product);
+        }
+        // state.data = action.payload;
       })
       .addCase(updateProduct.rejected, (state) => {
         state.status = dataStatus.ERROR;
         state.data = null;
+      })
+
+      .addCase(removeProduct.fulfilled, (state, action) => {
+        let product = state.data.find((item) => item.id === action.payload);
+        if (product) {
+          product.status = 0;
+        }
+      })
+
+      .addCase(restoreProduct.fulfilled, (state, action) => {
+        let product = state.data.find((item) => item.id === action.payload);
+        if (product) {
+          product.status = 1;
+        }
       });
   },
 });
 
-export const { setProducts, findById, updating } = productSlice.actions;
+export const {
+  setProducts,
+  // findById,
+  // updating,
+  // updateProductSuccess,
+} = productSlice.actions;
 export default productSlice.reducer;

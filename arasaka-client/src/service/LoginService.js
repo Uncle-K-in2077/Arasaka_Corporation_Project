@@ -21,6 +21,7 @@ const LoginService = {
       throw error;
     }
   },
+  
   async refresh() {
     try {
       const response = await AxiosService.post("/login/refresh", {

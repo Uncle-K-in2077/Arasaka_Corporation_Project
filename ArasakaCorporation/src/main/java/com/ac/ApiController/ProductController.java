@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -81,6 +80,8 @@ public class ProductController {
 	ProductConverter productConverter;
 
 	private final static String TOKEN_HEADER = "authorization";
+	
+
 
 	@GetMapping()
 	public ResponseEntity<Output<List<ProductDTO>>> getAllProduct(
@@ -159,12 +160,12 @@ public class ProductController {
 
 			if (category.isEmpty()) {
 				// Lấy tất cả các product theo tất cả category
-				pageProduct = productRepository.findByNameContainingAndStatusAndPriceBetween(keyword, 1, min, max,
+				pageProduct = productRepository.findByNameContainingAndPriceBetween(keyword, min, max,
 						pageable);
 			} else {
 				// Lấy product theo riêng category
-				pageProduct = productRepository.findByCategoryAndNameContainingAndStatusAndPriceBetween(category.get(),
-						keyword, 1, min, max, pageable);
+				pageProduct = productRepository.findByCategoryAndNameContainingAndPriceBetween(category.get(),
+						keyword, min, max, pageable);
 			}
 
 			if (pageProduct.getContent().size() == 0) {
@@ -322,6 +323,8 @@ public class ProductController {
 	        String image = (String) json.get("image").toString();
 	        String description = (String) json.get("description").toString();
 	        String createdAt = (String) json.get("createdAt").toString();
+	        String categoryName = (String) json.get("categoryName").toString();
+	        
 	        double price = Double.parseDouble(json.get("price").toString());
 
 	        productDTO.setId(id);
@@ -334,6 +337,7 @@ public class ProductController {
 	        productDTO.setQuantity(quantity);
 	        productDTO.setSaleStatus(saleStatus);
 	        productDTO.setStatus(status);
+	        productDTO.setCategoryName(categoryName);
 
 	    } catch (ParseException e) {
 	        e.printStackTrace();
@@ -352,6 +356,7 @@ public class ProductController {
 
 	    Product productEntity = productConverter.toEntity(productDTO);
 	    productEntity.setId(id); // Đặt lại ID của sản phẩm cần cập nhật
+	    System.out.println(productDTO.toString());
 
 	    // Kiểm tra xem người dùng đã tải lên hình ảnh mới hay không, nếu có thì cập nhật URL hình ảnh mới
 	    if (!urlImage.isEmpty()) {
@@ -364,5 +369,18 @@ public class ProductController {
 	    Product updated = productRepository.save(productEntity);
 	    return new ResponseEntity<>(productConverter.toDTO(updated), HttpStatus.OK);
 	}
-
+	
+	
+	
+//	@PostMapping
+//	public ResponseEntity<ProductDTO> create(@RequestBody ProductDTO item){
+//		try {
+//			Product product = productConverter.toEntity(item);
+//			Product productSaved = productRepository.save(product);
+//			return new ResponseEntity<>(productConverter.toDTO(productSaved), HttpStatus.CREATED);
+//		} catch (Exception e) {
+//			System.out.println(e.getMessage());
+//			return new ResponseEntity<>(null, HttpStatus.EXPECTATION_FAILED);
+//		}
+//	}
 }

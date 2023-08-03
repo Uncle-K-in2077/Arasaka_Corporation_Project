@@ -21,6 +21,18 @@ const CategoryService = {
       throw error;
     }
   },
+
+  async updateCategory(categoryId, categoryData) {
+    try {
+      const response = await AxiosService.put(
+        `/category/${categoryId}`,
+        categoryData
+      );
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  },
 };
 
 export default CategoryService;

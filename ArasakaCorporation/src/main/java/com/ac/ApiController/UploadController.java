@@ -1,5 +1,7 @@
 package com.ac.ApiController;
 
+import java.util.Optional;
+
 import javax.servlet.annotation.MultipartConfig;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,14 +22,16 @@ public class UploadController {
 	UploadService uploadService;
 	
 	@PostMapping("/api/upload")
-	public ResponseEntity<String> uploadImage(@RequestParam("img") MultipartFile file) {
-//        try {
-            String imageUrl = uploadService.save(file);
-            System.out.println(imageUrl);
+	public ResponseEntity<String> uploadImage(@RequestParam("img") Optional<MultipartFile> file) {
+        try {
+        	if(file.isEmpty()){
+                return new ResponseEntity<>("", HttpStatus.OK);
+        	}
+            String imageUrl = uploadService.save(file.get());
             return new ResponseEntity<>(imageUrl, HttpStatus.OK);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>("Error uploading image", HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
+        } catch (Exception e) {
+            return new ResponseEntity<>("Error uploading image", HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
 	
 }

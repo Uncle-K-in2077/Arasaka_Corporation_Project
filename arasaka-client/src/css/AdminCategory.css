@@ -1,0 +1,22 @@
+/** @format */
+
+.category-card {
+  background-color: rgba(0, 0, 0, 0.592) !important;
+  height: 90px !important;
+  border: 1px solid #ffffff !important;
+  /* padding: 20px !important; */
+}
+.category {
+  /* padding: 15px 15px !important; */
+
+  display: inline-block !important;
+  border: 1px solid #fe5000 !important;
+  vertical-align: middle;
+}
+.newProduct-input-2 {
+  width: 30% !important;
+  color: #fe5000 !important;
+  background-color: #00000000 !important;
+  padding: 8px !important;
+  border: 0.5px solid #ffffff !important;
+}

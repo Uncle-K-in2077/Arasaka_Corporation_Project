@@ -1,3 +1,5 @@
+/** @format */
+
 .video-container {
   position: fixed;
   top: 0;
@@ -16,43 +18,49 @@
 
 /* Đảm bảo nội dung không bị che phủ bởi video */
 
-
-.nav-link{
-    color: #ffffff !important;
-    font-weight: 700 !important;
-    letter-spacing: -.03em !important;
-    font-family: 'Rajdhani', sans-serif !important;
-    font-size: 18px !important;
-    line-height: 23px !important;
-    text-transform: uppercase !important;
-    letter-spacing: .12em !important;
+.nav-link {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.03em !important;
+  font-family: "Rajdhani", sans-serif !important;
+  font-size: 18px !important;
+  line-height: 23px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.12em !important;
+  text-decoration: none !important;
 }
 
-.nav-item{
+.nav-item {
   margin-right: 1.5rem !important;
+  text-decoration: none !important;
 }
 
-.navbar{
+.navbar {
   justify-content: end !important;
   padding-top: 0 !important;
 }
 
-.header-logo{
+.header-logo {
   width: 25% !important;
 }
 
-.navbar-content{
+.navbar-content {
   min-width: 100% !important;
+  padding-top: 10px !important;
+  padding-bottom: 10px !important;
 }
-.navbar-collapse{
+.navbar-collapse {
   display: flex !important;
   justify-content: space-between !important;
   align-items: center !important;
   padding: 0px 20px !important;
 }
 
-.nav-link-active{
-  color: #FE5000 !important;
+.nav-link-active {
+  color: #fe5000 !important;
   font-weight: 900 !important;
 }
 
+.product-block {
+  padding: 20px !important;
+}

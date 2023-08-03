@@ -1,0 +1,30 @@
+/**
+ * CSS cho Toast
+ *
+ * @format
+ */
+
+.toast {
+  background-color: #343a40 !important;
+  color: #fe5000 !important;
+}
+
+/* Định dạng các yếu tố bên trong Toast */
+.toast-header {
+  background-color: #202326 !important;
+}
+
+.toast-body {
+  padding: 1rem !important;
+}
+
+/* Hiệu ứng hiển thị của Toast */
+.toast.show {
+  opacity: 1 !important;
+}
+
+/* Hiệu ứng ẩn của Toast */
+.toast.hide {
+  opacity: 0 !important;
+  transform: translate(-50%, 100%) !important;
+}

@@ -8,6 +8,7 @@ import { refresh } from "./redux/authenSlice";
 import AdminProduct from "./pages/adminProduct";
 import Home from "./pages/Home";
 import { useDispatch } from "react-redux";
+import Product from "./pages/Product";
 
 const About = () => <h1>Giới thiệu</h1>;
 
@@ -23,9 +24,9 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Home />} />
+        <Route path="/*" element={<Home />} />
         <Route path="/about" element={<About />} />
-        <Route path="/cart" element={<TourCard />} />
+        <Route path="/shop" element={<Product />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/admin/*" element={<AdminProduct />} />

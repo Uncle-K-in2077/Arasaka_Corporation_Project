@@ -13,6 +13,7 @@ const ProductService = {
     }
   },
 
+
   async getProductById(productId) {
     try {
       const response = await AxiosService.get(`/product/${productId}`);
@@ -36,7 +37,7 @@ const ProductService = {
   async updateProduct(productId, productData) {
     try {
       const response = await AxiosService.put(
-        `/products/${productId}`,
+        `/product/${productId}`,
         productData
       );
       return response.data;
@@ -52,6 +53,16 @@ const ProductService = {
       return response.data;
     } catch (error) {
       console.error(`Error deleting product with ID ${productId}:`, error);
+      throw error;
+    }
+  },
+
+  async restoreProduct(productId) {
+    try {
+      const response = await AxiosService.put(`/product/${productId}/restore`);
+      return response.data;
+    } catch (error) {
+      console.error(`Error restoring product with ID ${productId}:`, error);
       throw error;
     }
   },

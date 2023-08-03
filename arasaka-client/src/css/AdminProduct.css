@@ -76,9 +76,10 @@ hr {
 }
 
 .product {
-  height: 70vh; /* Định dạng chiều cao của thẻ div */
+  height: 75vh; /* Định dạng chiều cao của thẻ div */
   overflow-y: scroll !important;
 }
+
 /* width */
 ::-webkit-scrollbar {
   width: 10px;
@@ -120,7 +121,7 @@ hr {
 
 .card-body {
   color: #ffffff;
-  background-color: rgba(0, 0, 0, 0.796) !important ;
+  background-color: rgba(0, 0, 0, 0.916) !important ;
   border: 2px solid #ec4f00 !important;
   border-radius: 0% !important;
 }
@@ -308,4 +309,70 @@ hr {
   background-color: #000000 !important;
   color: #ec4e00 !important;
   text-transform: uppercase !important;
+}
+
+/* Switch */
+.switch {
+  position: relative;
+  height: 1.5rem;
+  width: 3rem;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 9999px;
+  background-color: rgba(100, 116, 139, 0.377);
+  transition: all 0.3s ease;
+}
+
+.switch:checked {
+  background-color: rgb(236, 72, 72);
+}
+
+.switch::before {
+  position: absolute;
+  content: "";
+  left: calc(1.5rem - 1.6rem);
+  top: calc(1.5rem - 1.6rem);
+  display: block;
+  height: 1.6rem;
+  width: 1.6rem;
+  cursor: pointer;
+  border: 1px solid rgba(100, 116, 139, 0.527);
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow: 0 3px 10px rgba(100, 116, 139, 0.327);
+  transition: all 0.3s ease;
+}
+
+.switch:hover::before {
+  box-shadow: 0 0 0px 8px rgba(0, 0, 0, 0.15);
+}
+
+.switch:checked:hover::before {
+  box-shadow: 0 0 0px 8px rgba(236, 72, 72, 0.15);
+}
+
+.switch:checked:before {
+  transform: translateX(100%);
+  border-color: rgba(236, 72, 72, 1);
+}
+
+.filter-select {
+  color: #ffffff !important;
+  background-color: transparent;
+  opacity: 100% !important;
+  padding: 10px !important;
+  border: 0.5px solid #ffffff !important;
+  width: 30% !important;
+  min-height: 100% !important;
+}
+.filter-search {
+  width: 30% !important;
+  border-radius: 5px;
+  padding: 10px !important;
+  background-color: #ffffff47 !important;
+  color: #ffffff !important;
+}
+.filter {
+  align-content: space-between !important;
 }

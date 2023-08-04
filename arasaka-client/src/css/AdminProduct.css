@@ -3,6 +3,84 @@
  * @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
  */
 
+@-webkit-keyframes neon5 {
+  0% {
+    text-shadow: 0 0 7px #fff, 0 0 14px #fff, 0 0 21px #fff,
+      0 0 28px rgb(255, 106, 0), 0 0 49px rgb(255, 106, 0),
+      0 0 56px rgb(255, 106, 0), 0 0 70px rgb(255, 106, 0),
+      0 0 105px rgb(255, 106, 0);
+  }
+  100% {
+    text-shadow: 0 0 2.5px #fff, 0 0 5px #fff, 0 0 7.5px #fff,
+      0 0 10px rgb(255, 106, 0), 0 0 17.5px rgb(255, 106, 0),
+      0 0 20px rgb(255, 106, 0), 0 0 25px rgb(255, 106, 0),
+      0 0 37.5px rgb(255, 106, 0);
+  }
+}
+
+@-moz-keyframes neon5 {
+  0% {
+    text-shadow: 0 0 7px #fff, 0 0 14px #fff, 0 0 21px #fff,
+      0 0 28px rgb(255, 106, 0), 0 0 49px rgb(255, 106, 0),
+      0 0 56px rgb(255, 106, 0), 0 0 70px rgb(255, 106, 0),
+      0 0 105px rgb(255, 106, 0);
+  }
+  100% {
+    text-shadow: 0 0 2.5px #fff, 0 0 5px #fff, 0 0 7.5px #fff,
+      0 0 10px rgb(255, 106, 0), 0 0 17.5px rgb(255, 106, 0),
+      0 0 20px rgb(255, 106, 0), 0 0 25px rgb(255, 106, 0),
+      0 0 37.5px rgb(255, 106, 0);
+  }
+}
+
+@keyframes neon5 {
+  0% {
+    text-shadow: 0 0 7px #fff, 0 0 14px #fff, 0 0 21px #fff,
+      0 0 28px rgb(255, 106, 0), 0 0 49px rgb(255, 106, 0),
+      0 0 56px rgb(255, 106, 0), 0 0 70px rgb(255, 106, 0),
+      0 0 105px rgb(255, 106, 0);
+  }
+  100% {
+    text-shadow: 0 0 2.5px #fff, 0 0 5px #fff, 0 0 7.5px #fff,
+      0 0 10px rgb(255, 106, 0), 0 0 17.5px rgb(255, 106, 0),
+      0 0 20px rgb(255, 106, 0), 0 0 25px rgb(255, 106, 0),
+      0 0 37.5px rgb(255, 106, 0);
+  }
+}
+
+/* @-webkit-keyframes neon5 {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff9900,
+      0 0 70px #ff9900, 0 0 80px #ff9900, 0 0 100px #ff9900, 0 0 150px #ff9900;
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #ff9900,
+      0 0 35px #ff9900, 0 0 40px #ff9900, 0 0 50px #ff9900, 0 0 75px #ff9900;
+  }
+}
+
+@keyframes neon5 {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff9900,
+      0 0 70px #ff9900, 0 0 80px #ff9900, 0 0 100px #ff9900, 0 0 150px #ff9900;
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #ff9900,
+      0 0 35px #ff9900, 0 0 40px #ff9900, 0 0 50px #ff9900, 0 0 75px #ff9900;
+  }
+}
+
+@-moz-keyframes neon5 {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #ff9900,
+      0 0 70px #ff9900, 0 0 80px #ff9900, 0 0 100px #ff9900, 0 0 150px #ff9900;
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #ff9900,
+      0 0 35px #ff9900, 0 0 40px #ff9900, 0 0 50px #ff9900, 0 0 75px #ff9900;
+  }
+} */
+
 * {
   margin: 0;
   padding: 0;
@@ -34,7 +112,7 @@ h6 {
   font-family: "Rajdhani", sans-serif !important;
 }
 h4 {
-  color: #ffffff !important;
+  color: #fe5000 !important;
   font-weight: 600 !important;
   letter-spacing: -0.03em !important;
   font-family: "Rajdhani", sans-serif !important;
@@ -72,7 +150,7 @@ hr {
 
 .content {
   padding: 10px 20px 10px 20px !important;
-  background-color: #0000003c;
+  background-color: #00000057;
 }
 
 .product {
@@ -135,7 +213,7 @@ hr {
 .newProduct-input::placeholder {
   color: #ffffff !important;
 }
-.newProduct-input:focus {
+.newProduct-input:checked {
   border: 2px solid #ec4f00 !important;
 }
 
@@ -147,7 +225,13 @@ hr {
 
 .product-link:hover {
   color: #ffffff;
-  transform: translate(5px, 12px) !important;
+}
+
+.neon-effect:hover {
+  color: #ffffff !important;
+  -webkit-animation: neon5 1.5s ease-in-out infinite alternate;
+  -moz-animation: neon5 1.5s ease-in-out infinite alternate;
+  animation: neon5 1.5s ease-in-out infinite alternate;
 }
 
 .detail-product-title {
@@ -340,16 +424,16 @@ hr {
   border: 1px solid rgba(100, 116, 139, 0.527);
   border-radius: 9999px;
   background-color: rgba(255, 255, 255, 1);
-  box-shadow: 0 3px 10px rgba(100, 116, 139, 0.327);
+  text-shadow: 0 3px 10px rgba(100, 116, 139, 0.327);
   transition: all 0.3s ease;
 }
 
 .switch:hover::before {
-  box-shadow: 0 0 0px 8px rgba(0, 0, 0, 0.15);
+  text-shadow: 0 0 0px 8px rgba(0, 0, 0, 0.15);
 }
 
 .switch:checked:hover::before {
-  box-shadow: 0 0 0px 8px rgba(236, 72, 72, 0.15);
+  text-shadow: 0 0 0px 8px rgba(236, 72, 72, 0.15);
 }
 
 .switch:checked:before {

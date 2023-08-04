@@ -41,6 +41,11 @@ function Header() {
                   <li className="nav-link">LOGIN</li>
                 </Link>
               </li>
+              <li className="nav-item">
+                <Link to="/shop">
+                  <li className="nav-link">ELSE</li>
+                </Link>
+              </li>
             </ul>
           </div>
         </div>

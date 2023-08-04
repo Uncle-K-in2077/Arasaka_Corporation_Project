@@ -9,6 +9,7 @@ import {
   createCategory,
 } from "../redux/categorySlice";
 import { useDispatch } from "react-redux";
+import Toast from "./Toast";
 // import { status } from "./../utils/dataStatus";
 
 function AdminCategory() {
@@ -18,6 +19,8 @@ function AdminCategory() {
 
   const [categoryUD, setCategoryUD] = useState(null);
   const [newCategory, setNewCategory] = useState({ name: "", status: 1 });
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
   const dispatch = useDispatch();
 
   const getAllCategories = async () => {
@@ -48,7 +51,8 @@ function AdminCategory() {
       );
       console.log("update success");
       console.log(res);
-
+      setToastMessage("Update success");
+      setShowToast(true);
       const formRef = formRefs[id];
       if (formRef && formRef.current) {
         formRef.current.querySelector("#cancelBtn").click();
@@ -113,12 +117,12 @@ function AdminCategory() {
       >
         <div className="modal-dialog">
           <form
-            className="modal-content"
+            className="modal-content border-3 bg-opacity-10"
             key="create"
             onSubmit={handleCreateCategory}
             style={{
               backgroundColor: "#111111",
-              border: "1px solid #FE5000",
+              border: "2px solid #FF5F1F",
               borderRadius: "0",
             }}
           >
@@ -136,7 +140,7 @@ function AdminCategory() {
             <div className="modal-body">
               <input
                 required
-                className="newProduct-input"
+                className="newProduct-input-3"
                 type="text"
                 placeholder="New Category Name"
                 style={{ marginBottom: "10px" }}
@@ -165,7 +169,7 @@ function AdminCategory() {
       <div className="category-main">
         {/* table start */}
         <table
-          className="table table-dark table-bordered table-striped"
+          className="table table-dark table-bordered table-striped table-hover"
           style={{
             opacity: "90%",
             color: "#FFFF",
@@ -192,12 +196,16 @@ function AdminCategory() {
                   <>
                     <tr key={category.id}>
                       <th scope="row">{category.id}</th>
-                      <td>{category.name}</td>
+                      <td className="neon-effect">{category.name}</td>
                       <td>
                         {category.status === 1 ? (
-                          <p style={{ color: "green" }}>Online</p>
+                          <p style={{ color: "#39ff14", fontWeight: "600" }}>
+                            Online
+                          </p>
                         ) : (
-                          <p style={{ color: "#FE5000" }}>Offline</p>
+                          <p style={{ color: "#FF5F1F", fontWeight: "600" }}>
+                            Offline
+                          </p>
                         )}
                       </td>
                       <td colSpan={0.5}>
@@ -289,6 +297,16 @@ function AdminCategory() {
             )}
           </tbody>
         </table>
+        {/* Show Toast */}
+        {showToast ? (
+          <Toast
+            className="bg-danger"
+            title="Notification"
+            message={toastMessage}
+          />
+        ) : (
+          ""
+        )}
       </div>
     </div>
   );

@@ -24,3 +24,14 @@
   height: 88vh; /* Định dạng chiều cao của thẻ div */
   overflow-y: scroll !important;
 }
+
+.newProduct-input-3 {
+  width: 100% !important;
+  color: #fe5000 !important;
+  background-color: #00000000 !important;
+  padding: 8px !important;
+  border: 1px solid #fe5000 !important;
+}
+.newProduct-input-3::placeholder {
+  color: #ffffff !important;
+}

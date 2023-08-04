@@ -5,7 +5,7 @@ import TourCard from "./component/TourCard";
 import LoginForm from "./component/LoginForm";
 import RegisterPage from "./pages/registerPage";
 import { refresh } from "./redux/authenSlice";
-import AdminProduct from "./pages/adminProduct";
+import AdminPages from "./pages/AdminPages";
 import Home from "./pages/Home";
 import { useDispatch } from "react-redux";
 import Product from "./pages/Product";
@@ -29,7 +29,7 @@ function App() {
         <Route path="/shop" element={<Product />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/admin/*" element={<AdminProduct />} />
+        <Route path="/admin/*" element={<AdminPages />} />
       </Routes>
     </div>
   );

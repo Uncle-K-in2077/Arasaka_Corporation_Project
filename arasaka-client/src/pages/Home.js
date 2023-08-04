@@ -22,7 +22,7 @@ function Home() {
       <Header />
 
       {/* Body */}
-      <div className="container content">
+      <div className="">
         <h1>ARASAKA LANDING PAGE</h1>
         <hr />
         <p>

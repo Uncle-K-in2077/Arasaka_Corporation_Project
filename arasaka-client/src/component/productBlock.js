@@ -13,7 +13,7 @@ function ProductBlock() {
           return (
             <div className="col-lg-3 md-5 sm-5 product-block">
               <img
-                className="product-img"
+                className="product-img neon-effect"
                 id="img-product"
                 style={{ width: "100%" }}
                 src={"http://localhost:8080/" + product.image}

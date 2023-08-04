@@ -356,7 +356,12 @@ function AdminProduct() {
                           className="product-link"
                           to={"/admin/product/" + product.id}
                         >
-                          <h5>{product.name}</h5>
+                          <div
+                            className="neon-effect"
+                            style={{ color: "#FE5000 !important" }}
+                          >
+                            <h4>{product.name}</h4>
+                          </div>
                         </Link>
                         Price( USD ): <br />
                         <span className="product-link">{product.price}$</span>

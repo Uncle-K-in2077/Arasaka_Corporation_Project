@@ -6,10 +6,10 @@ import "../css/AdminProduct.css";
 
 import SideBerMenu from "../component/sideBarMenu";
 import AdminProductTable from "../component/AdminProduct";
-import AdminCategory from "./../component/AdminCategory";
-import AdminAccount from "./../component/AdminAccount";
-import AdminOrder from "./../component/AdminOrder";
-import AdminReport from "./../component/AdminReport";
+import AdminCategory from "../component/AdminCategory";
+import AdminAccount from "../component/AdminAccount";
+import AdminOrder from "../component/AdminOrder";
+import AdminReport from "../component/AdminReport";
 import AdminProductDetail from "../component/AdminProductDetail";
 
 function AdminProduct() {

@@ -14,7 +14,6 @@ import Toast from "./Toast";
 
 function AdminCategory() {
   const categoryData = useSelector((state) => state.category.data);
-  const formRefs = {};
   // const [categoryData, setCategoryData] = useState();
 
   const [categoryUD, setCategoryUD] = useState(null);
@@ -53,10 +52,8 @@ function AdminCategory() {
       console.log(res);
       setToastMessage("Update success");
       setShowToast(true);
-      const formRef = formRefs[id];
-      if (formRef && formRef.current) {
-        formRef.current.querySelector("#cancelBtn").click();
-      }
+      const btn = document.getElementById(`cancelBtn${id}`);
+      btn.click();
     } catch (error) {
       console.log(error);
       console.log("update fail: ", error);
@@ -233,7 +230,6 @@ function AdminCategory() {
                           className="collapse"
                           id={`collapseExample${category.id}`}
                           style={{ padding: "5px" }}
-                          ref={formRefs[category.id]}
                         >
                           <form
                             key={category.id}
@@ -283,7 +279,7 @@ function AdminCategory() {
                               data-bs-target={`#collapseExample${category.id}`}
                               aria-expanded="false"
                               aria-controls={`collapseExample${category.id}`}
-                              id="cancelBtn"
+                              id={"cancelBtn" + category.id}
                             >
                               Cancel
                             </button>

@@ -1,0 +1,88 @@
+/** @format */
+@keyframes blink {
+  50% {
+    border-left-color: #ec4e00 !important;
+  }
+}
+.editAccount {
+  padding: 0.4em 1.3em !important;
+  overflow: hidden !important;
+  background-color: transparent !important;
+  vertical-align: middle;
+  font-size: 16px !important;
+  transition: 0.3s !important;
+  z-index: 1 !important;
+  font-family: "Rajdhani", sans-serif !important;
+  color: #ffffff !important;
+  border-left: 1px solid #ec4e00 !important;
+}
+.editAccount:hover {
+  border-left: 2px solid #ec4e00 !important;
+  animation: blink 0.5s !important;
+  animation-iteration-count: 10 !important;
+}
+.customAccountSelect {
+  padding: 0.4em 1.4em !important;
+  border: 1px solid #ec4e00 !important;
+  overflow: hidden !important;
+  background-color: transparent !important;
+  font-size: 16px !important;
+  z-index: 1 !important;
+  font-family: "Rajdhani", sans-serif !important;
+
+  color: #ffffff !important;
+}
+
+/* button effect */
+.customButton3 {
+  padding: 0.2em 1.2em !important;
+  border: 1px solid #ffffff !important;
+  overflow: hidden !important;
+  background-color: transparent !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
+  font-size: 18px !important;
+  font-weight: 600 !important;
+  transition: 0.3s !important;
+  z-index: 1 !important;
+  font-family: "Rajdhani", sans-serif !important;
+
+  color: #ffffff !important;
+}
+
+.customButton3::before {
+  content: "" !important;
+  width: 0 !important;
+  height: 300% !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) rotate(45deg) !important;
+  background: #ec4e00 !important;
+  transition: 0.5s ease !important;
+  display: block !important;
+  z-index: -1 !important;
+}
+
+.customButton3:hover::before {
+  width: 205% !important;
+}
+
+.customButton3:hover {
+  color: #000000 !important;
+  font-weight: 600 !important;
+  border: 1px solid #000000 !important;
+}
+
+.filter-search-account {
+  width: 100% !important;
+  border-radius: 0;
+  padding: 7px 10px 10px 10px !important;
+  background-color: transparent !important;
+  color: #ffffff !important;
+  border: 1px solid #ffffff !important;
+}
+.filter-search-account::placeholder {
+  color: #fe5000 !important;
+  /* color: #ffffff !important; */
+}

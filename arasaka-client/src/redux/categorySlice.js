@@ -49,7 +49,7 @@ const categorySlice = createSlice({
           state.data.push(cate);
         }
       })
-      .addCase(updateCategory.rejected, (state, action) => {
+      .addCase(updateCategory.rejected, (state) => {
         state.status = dataStatus.ERROR;
         state.data = null;
       })

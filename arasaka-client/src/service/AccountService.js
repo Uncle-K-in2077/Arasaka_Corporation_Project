@@ -1,3 +1,5 @@
+/** @format */
+
 import AxiosService from "./AxiosService";
 
 const AccountService = {
@@ -45,7 +47,7 @@ const AccountService = {
       if (response.status === 201) {
         // Đăng ký thành công, trả về thông tin người dùng đã đăng ký
         return response;
-      } else if(response.status === 400) {
+      } else if (response.status === 400) {
         return response.error;
       }
     } catch (error) {
@@ -54,9 +56,21 @@ const AccountService = {
     }
   },
 
-  async getUserProfile() {
+  async updateAccount(accountId, accountData) {
     try {
-      const response = await AxiosService.get("/user/profile");
+      const response = await AxiosService.put(
+        `/account/${accountId}`,
+        accountData
+      );
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  },
+
+  async getUserProfile(accountId) {
+    try {
+      const response = await AxiosService.get(`/account/${accountId}`);
 
       if (response.status === 200) {
         // Lấy thông tin người dùng thành công, trả về thông tin người dùng

@@ -10,3 +10,166 @@
 a {
   text-decoration: none !important;
 }
+
+.breadcrumbs {
+  background-color: #181818 !important;
+  display: flex;
+  height: 140px !important;
+  margin-left: -550px !important;
+  margin-right: -550px !important;
+  /* width: 100vw !important; */
+  color: #ffffff !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+.breadcrumb-title {
+  font-size: 45px !important;
+  line-height: 1em !important;
+  font-weight: 700 !important;
+}
+.filterBlock {
+  padding: 10px !important;
+}
+
+.image-container img {
+  transition: all 0.2s;
+  -webkit-transition: all 0.2s;
+  -moz-transition: all 0.2s;
+}
+
+.image-container img {
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+  -moz-filter: grayscale(100%);
+  border: 2px solid #b3b3b3b7;
+}
+
+.image-container img:hover {
+  filter: grayscale(0%);
+  -webkit-filter: grayscale(0%);
+  -moz-filter: grayscale(0%);
+}
+
+.image-container:hover .atcBtn {
+  opacity: 1 !important;
+}
+
+.atcBtn {
+  transition: 0.5s ease !important;
+  opacity: 0 !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  -ms-transform: translate(-50%, -50%) !important;
+  text-align: center !important;
+}
+
+/* button effect */
+.customButton4 {
+  padding: 0.4em 1em !important;
+  border: 2px solid #ffffff !important;
+  overflow: hidden !important;
+  background-color: #ffffff !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  transition: 0.3s !important;
+  z-index: 1 !important;
+  font-family: "Rajdhani", sans-serif !important;
+  line-height: 1.5em;
+  letter-spacing: 0.12em;
+
+  color: #000000 !important;
+}
+
+.customButton4::before {
+  content: "" !important;
+  width: 0 !important;
+  height: 300% !important;
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) rotate(180deg) !important;
+  background: #ec4e00 !important;
+  transition: 0.5s ease !important;
+  display: block !important;
+  z-index: -1 !important;
+}
+
+.customButton4:hover::before {
+  width: 205% !important;
+}
+
+.customButton4:hover {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  border: 2px solid #ec4e00 !important;
+}
+
+.product-name-a {
+  font-size: 25px;
+  text-transform: uppercase !important;
+  font-family: Rajdhani, sans-serif;
+  color: #fff;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -0.04em;
+  transition: color 0.2s ease-out;
+}
+.product-price {
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: -0.04em;
+  color: #fff;
+  font-weight: 700;
+  font-family: Rajdhani, sans-serif;
+  font-size: 25px;
+  text-align: right !important;
+}
+
+.product-name-a:hover {
+  color: #ec4e00 !important;
+  transition: 0.3s;
+  border-bottom: 1px solid #fff !important;
+}
+
+.product-block:hover img {
+  filter: grayscale(0%) !important;
+  -webkit-filter: grayscale(0%) !important;
+  -moz-filter: grayscale(0%) !important;
+  border: 2px solid #fe5000 !important;
+}
+
+.product-block:hover .product-name-a {
+  color: #ec4e00 !important;
+}
+
+.product-block-filter-search {
+  background-color: transparent !important;
+  padding: 10px !important;
+  min-width: 91% !important;
+  border: 1px solid #b3b3b3b7 !important;
+  color: #ffffff !important;
+  font-family: "Rajdhani", sans-serif !important;
+  font-weight: 600 !important;
+}
+.product-block-filter-search::placeholder {
+  color: #ec4f00df !important;
+  font-family: "Rajdhani", sans-serif !important;
+  font-weight: 600 !important;
+}
+.product-block-filter-search:focus {
+  outline: none !important;
+}
+
+.search {
+  padding: 0 !important;
+  margin-left: -7px !important;
+}
+
+.page-link:hover {
+  outline: none !important;
+  color: #ec4e00 !important;
+}

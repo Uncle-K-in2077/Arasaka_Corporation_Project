@@ -32,7 +32,7 @@ function Header() {
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/shop">
+                <Link to="/cart">
                   <li className="nav-link">CART</li>
                 </Link>
               </li>

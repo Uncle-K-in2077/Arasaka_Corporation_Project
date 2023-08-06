@@ -9,6 +9,7 @@ import AdminPages from "./pages/AdminPages";
 import Home from "./pages/Home";
 import { useDispatch } from "react-redux";
 import Product from "./pages/Product";
+import Cart from "./pages/Cart";
 
 const About = () => <h1>Giới thiệu</h1>;
 
@@ -29,6 +30,7 @@ function App() {
         <Route path="/shop" element={<Product />} />
         <Route path="/login" element={<LoginForm />} />
         <Route path="/register" element={<RegisterPage />} />
+        <Route path="/cart" element={<Cart />} />
         <Route path="/admin/*" element={<AdminPages />} />
       </Routes>
     </div>

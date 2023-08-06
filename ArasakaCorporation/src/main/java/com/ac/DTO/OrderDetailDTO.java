@@ -13,7 +13,6 @@ public class OrderDetailDTO {
 	 private int id;
 	    private int quantity;
 	    private double salePrice;
-	    private OrderDTO order;
-	    private ProductDTO product;
-	    
+	    private int orderId;
+	    private int productId;
 }

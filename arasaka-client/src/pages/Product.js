@@ -7,8 +7,11 @@ function Product() {
   return (
     <div className="home-container container">
       <Header />
-      <h1>All of our PRODUCT</h1>
-      <hr />
+      <div className="breadcrumbs">
+        <h3 className="breadcrumb-title">SHOP</h3>
+      </div>
+      {/* <h1>All of our PRODUCT</h1>
+      <hr /> */}
       <ProductBlock />
     </div>
   );

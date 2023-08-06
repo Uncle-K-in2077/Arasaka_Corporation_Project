@@ -75,6 +75,16 @@ const accountSlice = createSlice({
       })
       .addCase(login.rejected, (state, action) => {
         state.status = dataStatus.ERROR;
+      })
+      .addCase(refresh.pending, (state) => {
+        state.status = dataStatus.LOADING;
+      })
+      .addCase(refresh.fulfilled, (state, action) => {
+        state.status = dataStatus.SUCCESS;
+        state.currentUser = action.payload.account;
+      })
+      .addCase(refresh.rejected, (state, action) => {
+        state.status = dataStatus.ERROR;
       });
   },
 });

@@ -15,5 +15,6 @@ public class OrderDTO {
     private String phone;
     private int status;
     private List<OrderDetailDTO> orderDetails;
-    private AccountDTO account;
+    private int accountId;
+    private String accountName;
 }

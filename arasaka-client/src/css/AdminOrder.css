@@ -2,12 +2,64 @@
 
 .order-main {
   height: 88vh; /* Định dạng chiều cao của thẻ div */
-  overflow-y: scroll !important;
+  overflow-y: auto !important ;
 }
 .single-detail-order {
   animation: 2s ease-in-out !important;
+  background-color: rgba(0, 0, 0, 0.626) !important;
+  font-family: Rajdhani, sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 20px !important;
 }
 .detail-block {
-  border: 1px solid #ec4500 !important;
+  border: 1px solid #ec4e00 !important;
   padding: 10px !important;
+}
+.mech-title {
+  font-size: 24px !important;
+  text-transform: uppercase !important;
+  /* font-family: Rajdhani, sans-serif !important; */
+  font-family: "Mechsuit", sans-serif !important;
+  margin: 0 0 20px 0 !important;
+  /* color: #ec4e00 !important; */
+  color: #ffffff !important;
+  /* font-weight: 650 !important; */
+  letter-spacing: -0.01em !important;
+  margin-left: auto !important;
+}
+.single-order {
+  background-color: #3331318e !important;
+  font-family: Rajdhani, sans-serif !important;
+  font-size: 20px !important;
+  border: 1px solid #b3b3b384 !important;
+  margin: 0 !important;
+  font-weight: 900 !important;
+}
+.single-order:hover {
+  background-color: #a63a03 !important;
+  border: 1px solid rgb(145, 145, 145) !important;
+  color: #111111 !important;
+}
+.single-order:hover .account {
+  border-left: 2px solid #e0dede !important;
+  /* margin-left: 1px !important; */
+}
+.single-order-price {
+  font-size: inherit;
+  line-height: inherit;
+  letter-spacing: -0.04em;
+  color: #fff;
+  font-weight: 700;
+  font-family: Rajdhani, sans-serif;
+  font-size: 25px;
+  text-align: center;
+}
+.order-status {
+  font-family: Rajdhani, sans-serif !important;
+  font-size: 20px !important;
+  font-weight: 600 !important;
+}
+.detail-name {
+  color: #ec4e00 !important;
+  font-weight: 700 !important;
 }

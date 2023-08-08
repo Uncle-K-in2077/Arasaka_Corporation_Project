@@ -74,6 +74,8 @@ function ShoppingCart() {
       };
       dispatch(createNewOrder(orderDTO));
       dispatch(clear());
+      const btn = document.getElementById("resetBtn");
+      btn.click();
     } catch (error) {
       console.log(error);
     }
@@ -283,7 +285,8 @@ function ShoppingCart() {
               <div className="col-2">
                 <button
                   style={{ width: "100%", fontWeight: "600" }}
-                  className="customButton"
+                  className="customButton2"
+                  id="resetBtn"
                   type="reset"
                   data-bs-toggle="collapse"
                   data-bs-target="#collapseExample"
@@ -302,7 +305,7 @@ function ShoppingCart() {
               <div className="col-10" style={{ paddingRight: "0" }}>
                 <button
                   style={{ width: "100%" }}
-                  className="customButton"
+                  className="customButton4"
                   type="submit"
                 >
                   Check Out

@@ -22,7 +22,7 @@
 }
 .category-main {
   height: 88vh; /* Định dạng chiều cao của thẻ div */
-  overflow-y: scroll !important;
+  overflow-y: auto !important;
 }
 
 .newProduct-input-3 {

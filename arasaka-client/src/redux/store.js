@@ -7,6 +7,7 @@ import accountSlice from "./accountSlice";
 import productSlice from "./productSlice";
 import TempCartSlice from "./TempCartSlice";
 import authenSlice from "./authenSlice";
+import orderSlice from "./orderSlice";
 
 export default configureStore({
   reducer: {
@@ -15,5 +16,6 @@ export default configureStore({
     product: productSlice,
     cart: TempCartSlice,
     auth: authenSlice,
+    order: orderSlice,
   },
 });

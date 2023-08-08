@@ -21,14 +21,16 @@ function Login() {
     e.preventDefault();
     try {
       // Gọi action login bằng dispatch
-      const response = await dispatch(login({ email, password, dispatch, navigate }));
-    if (response.status === dataStatus.SUCCESS) {
-      setError("Login success");
-    } else if (response.status === dataStatus.LOADING) {
-      setError("Đang đăng nhập...");
-    } else if (response.status === dataStatus.ERROR) {
-      setError("Đăng nhập không thành công");
-    }
+      const response = await dispatch(
+        login({ email, password, dispatch, navigate })
+      );
+      if (response.status === dataStatus.SUCCESS) {
+        setError("Login success");
+      } else if (response.status === dataStatus.LOADING) {
+        setError("Đang đăng nhập...");
+      } else if (response.status === dataStatus.ERROR) {
+        setError("Đăng nhập không thành công");
+      }
     } catch (error) {
       setError("Đăng nhập không thành công");
     }
@@ -62,8 +64,9 @@ function Login() {
             <Link className="register-link" to="/register">
               {" "}
               REGISTER NOW
-            </Link>
+            </Link>{" "}
           </h6>
+          {/* <h6>Or continue as a guess</h6> */}
         </div>
 
         <div className="input">
@@ -98,6 +101,15 @@ function Login() {
             <div className="button__label">Continue</div>
             <div className="button__icon" />
           </button> */}
+        {/* <div className="form_title">
+          <h6>
+            Or continue as a{" "}
+            <Link className="register-link" to="/">
+              {" "}
+              GUESS
+            </Link>
+          </h6>
+        </div> */}
 
         <button type="submit" className="cybr-btn">
           Let's Go<span aria-hidden>_</span>

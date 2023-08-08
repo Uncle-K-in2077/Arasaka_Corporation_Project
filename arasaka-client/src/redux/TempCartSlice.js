@@ -14,10 +14,10 @@ const TempCartSlice = createSlice({
         state.data = [
           {
             productId: item.id,
-            name: item.name,
-            price: item.price,
+            productName: item.name,
+            salePrice: item.price,
             image: item.image,
-            count: 1,
+            quantity: 1,
             status: 1,
           },
         ];
@@ -28,14 +28,14 @@ const TempCartSlice = createSlice({
         (product) => product.productId === item.id
       );
       if (existingProduct) {
-        existingProduct.count += 1;
+        existingProduct.quantity += 1;
       } else {
         state.data.push({
           productId: item.id,
-          name: item.name,
-          price: item.price,
+          productName: item.name,
+          salePrice: item.price,
           image: item.image,
-          count: 1,
+          quantity: 1,
           status: 1,
         });
       }
@@ -60,7 +60,7 @@ const TempCartSlice = createSlice({
         (product) => product.productId === productId
       );
       if (productToUpdate) {
-        productToUpdate.count = Number(newCount);
+        productToUpdate.quantity = Number(newCount);
       }
     },
     clear: (state) => {

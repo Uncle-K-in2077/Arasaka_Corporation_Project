@@ -1,0 +1,13 @@
+/** @format */
+
+.order-main {
+  height: 88vh; /* Định dạng chiều cao của thẻ div */
+  overflow-y: scroll !important;
+}
+.single-detail-order {
+  animation: 2s ease-in-out !important;
+}
+.detail-block {
+  border: 1px solid #ec4500 !important;
+  padding: 10px !important;
+}

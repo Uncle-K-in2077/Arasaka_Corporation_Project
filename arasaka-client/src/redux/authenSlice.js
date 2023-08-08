@@ -4,6 +4,36 @@ import { getProducts } from "./productSlice";
 import LoginService from "../service/LoginService";
 import { status as dataStatus } from "../utils/dataStatus";
 import { getCategories } from "./categorySlice";
+import { getAllOrder } from "./orderSlice";
+
+// For logOut
+import { setOrder } from "./orderSlice";
+import { setProducts } from "./productSlice";
+import { findAll } from "./accountSlice";
+import { getCategory } from "./categorySlice";
+import { clear } from "./TempCartSlice";
+
+// Log out
+export const logOut = createAsyncThunk(
+  "authen/logOut",
+  async ({ dispatch, navigate }, thunkAPI) => {
+    try {
+      localStorage.removeItem("token");
+      localStorage.removeItem("currentUser");
+      // remove all data of redux store
+      dispatch(setOrder([]));
+      dispatch(setProducts([]));
+      dispatch(findAll([]));
+      dispatch(getCategory([]));
+      dispatch(clear());
+      navigate("/login");
+    } catch (error) {
+      navigate("/login");
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 // LOGIN
 export const login = createAsyncThunk(
   "authen/login",
@@ -14,8 +44,9 @@ export const login = createAsyncThunk(
       localStorage.setItem("currentUser", JSON.stringify(response.account));
       dispatch(getProducts());
       dispatch(getCategories());
+      dispatch(getAllOrder());
       if (response.account.role === 0) {
-        navigate("/admin");
+        navigate("/admin/product");
       } else {
         navigate("/");
       }
@@ -38,8 +69,9 @@ export const refresh = createAsyncThunk(
       localStorage.setItem("currentUser", JSON.stringify(response.account));
       dispatch(getProducts());
       dispatch(getCategories());
+      dispatch(getAllOrder());
       if (response.account.role === 0) {
-        navigate("/admin");
+        navigate("/admin/product");
       } else {
         navigate("/");
       }
@@ -85,6 +117,10 @@ const accountSlice = createSlice({
       })
       .addCase(refresh.rejected, (state, action) => {
         state.status = dataStatus.ERROR;
+      })
+      .addCase(logOut.fulfilled, (state, action) => {
+        state.status = dataStatus.SUCCESS;
+        state.data = action.payload;
       });
   },
 });

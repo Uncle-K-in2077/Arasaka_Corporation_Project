@@ -1,10 +1,12 @@
+/** @format */
+
 function AdminReport() {
-    return ( 
+  return (
     <>
-        <h1>REPORT</h1>
-        <hr/>
-    </> 
-    );
+      <h1>Order</h1>
+      <hr /> 
+    </>
+  );
 }
 
 export default AdminReport;

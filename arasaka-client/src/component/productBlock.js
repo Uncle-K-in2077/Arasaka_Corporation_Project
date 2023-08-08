@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 
 function ProductBlock() {
   const ProductData = useSelector((state) => state.product.data);
+  const categoryData = useSelector((state) => state.category.data);
 
   const dispatch = useDispatch();
 
@@ -16,9 +17,6 @@ function ProductBlock() {
   };
 
   // Pagination
-  const [sortType, setSortType] = useState("asc"); // "asc" cho sắp xếp tăng dần, "desc" cho sắp xếp giảm dần
-  const [sortColumn, setSortColumn] = useState("price"); // Tên cột mà bạn muốn sắp xếp (ví dụ: "price", "name")
-
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 9; // Số lượng sản phẩm hiển thị trên mỗi trang
   // test
@@ -27,18 +25,27 @@ function ProductBlock() {
     setKeyword(e.target.value);
     setCurrentPage(1); // Reset lại trang về trang đầu tiên khi tìm kiếm mới
   };
+  // filter
+  const [filter, setFilter] = useState({
+    searchText: "",
+    categoryId: 0,
+  });
 
   function filterAndPaginateProducts(
     products,
     currentPage,
     productsPerPage,
-    keyword = ""
+    keyword = "",
+    categoryId = 0
   ) {
-    const filteredProducts = keyword
-      ? products.filter((product) =>
-          product.name.toLowerCase().includes(keyword.toLowerCase())
-        )
-      : products;
+    const filteredProducts = products.filter((product) => {
+      const nameMatches = product.name
+        .toLowerCase()
+        .includes(keyword.toLowerCase());
+      const categoryMatches =
+        categoryId === 0 || categoryId === product.categoryId;
+      return nameMatches && categoryMatches;
+    });
 
     const indexOfLastProduct = currentPage * productsPerPage;
     const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
@@ -54,7 +61,8 @@ function ProductBlock() {
     ProductData,
     currentPage,
     productsPerPage,
-    keyword
+    keyword,
+    filter.categoryId
   );
 
   function paginateProducts(products, currentPage, productsPerPage) {
@@ -84,11 +92,6 @@ function ProductBlock() {
     }
   };
 
-  // filter
-  const [filter, setFilter] = useState({
-    searchText: "",
-    categoryId: 0,
-  });
   const handleChangeFilter = (e) => {
     const { name, value } = e.target;
     setFilter((prevFormData) => ({
@@ -96,14 +99,29 @@ function ProductBlock() {
       [name]: value,
     }));
   };
+  const handleCategoryClick = (categoryId) => {
+    setFilter((prevFilter) => ({
+      ...prevFilter,
+      categoryId: categoryId,
+    }));
+  };
 
   return (
     <div className="noCss mt-3">
       <div className="row">
-        <div className="col-lg-6">
+        <div
+          className="col-lg-6"
+          style={{
+            fontSize: "16px",
+            fontWeight: "lighter",
+            display: "flex",
+            alignItems: "center",
+            minHeight: "50px",
+          }}
+        >
           Showing {currentProducts.length} of {ProductData.length} items
         </div>
-        <div className="col-lg-3 select">Select</div>
+        <div className="col-lg-3 select"></div>
         <div className="col-lg-3 search">
           <input
             // value={filter.searchText}
@@ -120,31 +138,45 @@ function ProductBlock() {
 
       <div className="row">
         <div className="col-lg-3" style={{ padding: "10px" }}>
-          <div className="filterBlock" style={{ border: "1px solid #FE5000" }}>
-            <p style={{ borderBlockEnd: "1px solid #FE5000" }}>
-              Your customizations functions are HERE later sir!
+          <div className="filterBlock" style={{ border: "1px solid #272727" }}>
+            <p
+              className="filter-category"
+              style={{ borderBlockEnd: "1px solid #FE5000" }}
+              onClick={() => handleCategoryClick(0)}
+            >
+              Categories
             </p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores
-            dicta illum doloremque neque, pariatur voluptas reiciendis ipsum
-            aperiam id facere deserunt ex ea molestiae cum possimus nostrum
-            provident at voluptatum magnam sint temporibus aspernatur, ad
-            libero! Nihil quidem magni facilis amet! Repellendus totam, non esse
-            dolorum harum nulla molestias id.
+            {categoryData && categoryData.length > 0 ? (
+              categoryData.map((cate) => {
+                if (cate.status === 1)
+                  return (
+                    <div key={cate.id} className="cateItem">
+                      <ul className="category-list">
+                        <li
+                          className="category-list-item"
+                          name="categoryId"
+                          onClick={() => handleCategoryClick(cate.id)}
+                        >
+                          <p className="category-list-link">
+                            <span>&nbsp;</span>
+                            {cate.name}
+                          </p>
+                        </li>
+                      </ul>
+                    </div>
+                  );
+              })
+            ) : (
+              <div>
+                <h1>No Category Found</h1>
+              </div>
+            )}
           </div>
         </div>
         <div className="col-lg-9 row">
           {filteredAndPaginatedProducts ? (
             filteredAndPaginatedProducts.map((product) => {
-              if (
-                /* Chỗ này đã có hàm tìm kiếm kết hợp phân trang rồi nên sẽ tối ưu hơn */
-                /*  (filter.searchText === "" ||
-                  product.name
-                    .toLowerCase()
-                    .indexOf(filter.searchText.toLowerCase()) !== -1) && */
-                (filter.categoryId == 0 ||
-                  filter.categoryId == product.categoryId) &&
-                product.status === 1
-              )
+              if (product.status === 1)
                 return (
                   <div className="col-lg-4 sm-6 md-6 product-block">
                     <div className="image-container">

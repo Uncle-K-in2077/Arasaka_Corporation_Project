@@ -1,7 +1,7 @@
 /** @format */
 import React, { useEffect } from "react";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import TourCard from "./component/TourCard";
+// import TourCard from "./component/TourCard";
 import LoginForm from "./component/LoginForm";
 import RegisterPage from "./pages/registerPage";
 import { refresh } from "./redux/authenSlice";

@@ -1,7 +1,21 @@
 /** @format */
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { logOut } from "../redux/authenSlice";
+import { useDispatch } from "react-redux";
 
 function Header() {
+  const cartData = useSelector((state) => state.cart.data);
+  const currentUser = useSelector((state) => state.auth?.currentUser);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("currentUser");
+    dispatch(logOut({ dispatch, navigate }));
+  };
+
   return (
     <header>
       <nav className="navbar navbar-expand-lg">
@@ -10,7 +24,7 @@ function Header() {
             {/* logo */}
             <img
               className="header-logo orange-logo"
-              src="/assets/images/Arasaka4.png"
+              src="/assets/images/Arasaka.png"
               alt=""
             />
 
@@ -33,19 +47,41 @@ function Header() {
               </li>
               <li className="nav-item">
                 <Link to="/cart">
-                  <li className="nav-link">CART</li>
+                  <li className="nav-link">CART({cartData.length})</li>
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link to="/shop">
-                  <li className="nav-link">LOGIN</li>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link to="/shop">
-                  <li className="nav-link">ELSE</li>
-                </Link>
-              </li>
+              {currentUser ? (
+                <li className="nav-item">
+                  <Link to="/shop">
+                    <li className="nav-link">Hi {currentUser.username}</li>
+                  </Link>
+                </li>
+              ) : (
+                ""
+              )}
+              {currentUser?.role === 0 ? (
+                <li className="nav-item">
+                  <Link to="/admin">
+                    <li className="nav-link">To Admin Page</li>
+                  </Link>
+                </li>
+              ) : (
+                ""
+              )}
+
+              {currentUser ? (
+                <li className="nav-item">
+                  <li className="nav-link" onClick={handleLogout}>
+                    LogOUT
+                  </li>
+                </li>
+              ) : (
+                <li className="nav-item">
+                  <Link to="/login">
+                    <li className="nav-link">LogIn</li>
+                  </Link>
+                </li>
+              )}
             </ul>
           </div>
         </div>

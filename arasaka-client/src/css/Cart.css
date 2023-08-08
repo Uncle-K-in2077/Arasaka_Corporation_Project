@@ -1,4 +1,5 @@
 /** @format */
+@import url("https://fonts.cdnfonts.com/css/mechsuit");
 
 .cart-item {
   background-color: #333333db !important;
@@ -47,4 +48,46 @@
 .remove-cart:hover {
   cursor: pointer !important;
   color: #fe5000 !important;
+}
+
+.cart-right-item {
+  font-size: 45px !important;
+  text-transform: uppercase !important;
+  font-family: Rajdhani, sans-serif !important;
+  /* line-height: 1.5em !important; */
+  font-weight: 700 !important;
+  vertical-align: baseline !important;
+  letter-spacing: -0.02em !important;
+  text-align: center !important;
+}
+.amount-number {
+  font-size: 24px !important;
+  text-transform: uppercase !important;
+  /* font-family: Rajdhani, sans-serif !important; */
+  font-family: "Mechsuit", sans-serif !important;
+  margin: 20px 0 !important;
+  /* color: #ec4e00 !important; */
+  color: #ffffff !important;
+  /* font-weight: 650 !important; */
+  letter-spacing: 0.04em !important;
+  margin-left: auto !important;
+}
+.total-block-item {
+  display: flex !important;
+  align-items: center !important;
+  /* justify-content: center !important; */
+}
+.checkOut-right {
+  padding: 10px !important;
+  border: 1px solid #a0a0a0db;
+  margin-left: 0 !important;
+}
+.checkOut-input {
+  background-color: transparent !important;
+  padding: 10px !important;
+  min-width: 100% !important;
+  border: 1px solid #b3b3b384 !important;
+  color: #ffffff !important;
+  font-family: "Rajdhani", sans-serif !important;
+  font-weight: 600 !important;
 }

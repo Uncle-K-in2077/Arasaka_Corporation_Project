@@ -30,7 +30,7 @@ public class OrderDetailConverter {
         // Set the orderId and productId based on the relationship in the entity
         orderDetailDTO.setOrderId(orderDetail.getOrder().getId());
         orderDetailDTO.setProductId(orderDetail.getProduct().getId());
-
+        orderDetailDTO.setProductName(productRepository.findById(orderDetail.getProduct().getId()).orElse(null).getName());
         return orderDetailDTO;
     }
 

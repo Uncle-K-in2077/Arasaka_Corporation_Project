@@ -52,8 +52,13 @@ function Header() {
               </li>
               {currentUser ? (
                 <li className="nav-item">
-                  <Link to="/shop">
-                    <li className="nav-link">Hi {currentUser.username}</li>
+                  <Link to="/account/profile">
+                    <li className="nav-link">
+                      Hi{" "}
+                      <span style={{ color: "#ec4300", fontWeight: "600" }}>
+                        {currentUser.username}
+                      </span>
+                    </li>
                   </Link>
                 </li>
               ) : (

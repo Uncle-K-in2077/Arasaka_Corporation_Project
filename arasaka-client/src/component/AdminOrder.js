@@ -4,6 +4,7 @@ import { useSelector } from "react-redux/es/hooks/useSelector";
 import { useDispatch } from "react-redux";
 import { getAllOrder } from "./../redux/orderSlice";
 import { useEffect, useState } from "react";
+import { updateOrderStatusById } from "./../redux/orderSlice";
 import "../css/AdminOrder.css";
 
 import format from "date-fns/format";
@@ -18,8 +19,7 @@ function AdminOrder() {
 
   const getAllOrderForAdmin = async () => {
     try {
-      const res = await dispatch(getAllOrder());
-      dispatch(getAllOrder(res.data));
+      await dispatch(getAllOrder());
     } catch (error) {
       throw error;
     }
@@ -35,6 +35,20 @@ function AdminOrder() {
   //   theSong.click();
   //   theSong.click();
   // };
+
+  const updateOrderStatus = async (orderIdToUpdate, orderNewStatus) => {
+    try {
+      await dispatch(
+        updateOrderStatusById({
+          orderId: orderIdToUpdate,
+          orderStatus: orderNewStatus,
+        })
+      );
+    } catch (error) {
+      console.log("Error updating order status", error);
+    }
+    getAllOrderForAdmin();
+  };
 
   useEffect(() => {
     getAllOrderForAdmin();
@@ -192,6 +206,68 @@ function AdminOrder() {
                             {selectedOrderInfor.address}
                           </span>
                         </div>
+                      </div>
+                      <div
+                        className="mt-2 mb-2"
+                        style={{
+                          height: "1px",
+                          backgroundColor: "#a0a0a0db",
+                          textTransform: "uppercase",
+                        }}
+                      ></div>
+                      <div className="col-12">
+                        {selectedOrderInfor.status === 1 ? (
+                          <button
+                            className="customButton2"
+                            style={{ width: "100%" }}
+                            onClick={() => {
+                              updateOrderStatus(selectedOrderInfor.id, 2);
+                            }}
+                          >
+                            Processing complete {">"} ready to transport
+                          </button>
+                        ) : selectedOrderInfor.status === 2 ? (
+                          <div className="row" style={{ width: "100%" }}>
+                            <div
+                              className="col-3"
+                              style={{
+                                display: "flex",
+                                alignItems: "center",
+                              }}
+                            >
+                              <span className="product-name-a">Delivering</span>
+                            </div>
+                            <div className="col-9">
+                              <img
+                                style={{
+                                  maxWidth: "100%",
+                                  maxHeight: "100px",
+                                  marginRight: "100px",
+                                }}
+                                src="https://alaska.caravelo.com/images/as-loading.gif"
+                                alt="/"
+                              />
+                            </div>
+                          </div>
+                        ) : selectedOrderInfor.status === 3 ? (
+                          <span className="order-status">Received</span>
+                        ) : (
+                          <div className="row">
+                            <div
+                              className="col-12"
+                              style={{ textAlign: "center", fontWeight: "900" }}
+                            >
+                              <span
+                                className="order-status"
+                                style={{
+                                  color: "red",
+                                }}
+                              >
+                                This order had been CANCELED
+                              </span>
+                            </div>
+                          </div>
+                        )}
                       </div>
                     </div>
                   ) : (

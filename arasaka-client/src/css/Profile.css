@@ -1,0 +1,232 @@
+/** @format */
+
+.profile-main {
+  /* height: 100vh; Định dạng chiều cao của thẻ div */
+  overflow-y: scroll !important ;
+}
+.profile-body {
+  padding-left: 20px !important;
+  padding-right: 20px !important;
+}
+.processing {
+  color: #39ff14;
+  font-weight: 600 !important;
+}
+.delivering {
+  color: #fff01f;
+  font-weight: 600 !important;
+}
+.glitchButton {
+  --primary: hsl(
+    var(--primary-hue),
+    85%,
+    calc(var(--primary-lightness, 50) * 1%)
+  );
+  --shadow-primary: hsl(var(--shadow-primary-hue), 90%, 50%);
+  --primary-hue: 720;
+  --primary-lightness: 50;
+  --background-color: #9f0101 !important;
+  --color: hsl(0, 0%, 0%);
+  /* --color: blue; */
+  --font-size: 26px;
+  --shadow-primary-hue: 900;
+  --label-size: 9px;
+  --shadow-secondary-hue: 60;
+  --shadow-secondary: hsl(var(--shadow-secondary-hue), 90%, 60%);
+
+  --border: 4px;
+  --shimmy-distance: 5;
+  --clip-one: polygon(
+    0 2%,
+    100% 2%,
+    100% 95%,
+    95% 95%,
+    95% 90%,
+    85% 90%,
+    85% 95%,
+    8% 95%,
+    0 70%
+  );
+  --clip-two: polygon(
+    0 78%,
+    100% 78%,
+    100% 100%,
+    95% 100%,
+    95% 90%,
+    85% 90%,
+    85% 100%,
+    8% 100%,
+    0 78%
+  );
+  --clip-three: polygon(
+    0 44%,
+    100% 44%,
+    100% 54%,
+    95% 54%,
+    95% 54%,
+    85% 54%,
+    85% 54%,
+    8% 54%,
+    0 54%
+  );
+  --clip-four: polygon(
+    0 0,
+    100% 0,
+    100% 0,
+    95% 0,
+    95% 0,
+    85% 0,
+    85% 0,
+    8% 0,
+    0 0
+  );
+  --clip-five: polygon(
+    0 0,
+    100% 0,
+    100% 0,
+    95% 0,
+    95% 0,
+    85% 0,
+    85% 0,
+    8% 0,
+    0 0
+  );
+  --clip-six: polygon(
+    0 40%,
+    100% 40%,
+    100% 85%,
+    95% 85%,
+    95% 85%,
+    85% 85%,
+    85% 85%,
+    8% 85%,
+    0 70%
+  );
+  --clip-seven: polygon(
+    0 63%,
+    100% 63%,
+    100% 80%,
+    95% 80%,
+    95% 80%,
+    85% 80%,
+    85% 80%,
+    8% 80%,
+    0 70%
+  );
+  padding: 0.4em 1em !important;
+  border: 2px solid #ffffff !important;
+  overflow: hidden !important;
+  background-color: #ffffff !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  transition: 0.3s !important;
+  z-index: 1 !important;
+  font-family: "Rajdhani", sans-serif !important;
+  line-height: 1.5em;
+  letter-spacing: 0.12em;
+
+  color: #000000 !important;
+}
+.glitchButton:hover {
+  --primary: hsl(
+    var(--primary-hue),
+    85%,
+    calc(var(--primary-lightness, 50) * 0.8%)
+  );
+}
+.glitchButton:active {
+  --primary: hsl(
+    var(--primary-hue),
+    85%,
+    calc(var(--primary-lightness, 50) * 0.6%)
+  );
+}
+
+.glitchButton:after,
+.glitchButton:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  clip-path: var(--clip);
+  z-index: -1;
+}
+
+.glitchButton:before {
+  background: var(--shadow-primary);
+  transform: translate(var(--border), 0);
+}
+
+.glitchButton:after {
+  background: var(--primary);
+}
+
+.glitchButton__tag {
+  position: absolute;
+  padding: 1px 4px;
+  letter-spacing: 1px;
+  line-height: 1;
+  bottom: -5%;
+  right: 5%;
+  font-weight: normal;
+  color: #fdee06;
+  font-size: var(--label-size);
+}
+
+.glitchButton__glitch {
+  position: absolute;
+  top: calc(var(--border) * -1);
+  left: calc(var(--border) * -1);
+  right: calc(var(--border) * -1);
+  bottom: calc(var(--border) * -1);
+  background: var(--shadow-primary);
+  text-shadow: 2px 2px var(--shadow-primary), -2px -2px var(--shadow-secondary);
+  clip-path: var(--clip);
+  animation: glitch 2s infinite;
+  display: none;
+}
+
+.glitchButton:hover .glitchButton__glitch {
+  display: block;
+}
+
+.glitchButton__glitch:before {
+  content: "";
+  position: absolute;
+  top: calc(var(--border) * 1);
+  right: calc(var(--border) * 1);
+  bottom: calc(var(--border) * 1);
+  left: calc(var(--border) * 1);
+  clip-path: var(--clip);
+  background: var(--primary);
+  z-index: -1;
+}
+.customButton5 {
+  background-color: transparent !important;
+  border: none !important;
+}
+.customButtonCancel {
+  padding: 0.3em 1em !important;
+  border: 2px solid #dc0b0b !important;
+  /* overflow: hidden !important; */
+  background-color: #ffffff !important;
+  text-align: center !important;
+  text-transform: uppercase !important;
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  transition: 0.3s !important;
+  z-index: 1 !important;
+  font-family: "Rajdhani", sans-serif !important;
+  line-height: 1.5em;
+  letter-spacing: 0.12em;
+  color: #dc0b0b !important;
+}
+.customButtonCancel:hover {
+  color: #ffffff !important;
+  border: 2px solid #ffffff !important;
+  background-color: #dc0b0b !important;
+}

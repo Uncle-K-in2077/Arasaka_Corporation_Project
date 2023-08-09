@@ -2,7 +2,7 @@
 
 .order-main {
   height: 88vh; /* Định dạng chiều cao của thẻ div */
-  overflow-y: auto !important ;
+  overflow-y: scroll !important ;
 }
 .single-detail-order {
   animation: 2s ease-in-out !important;

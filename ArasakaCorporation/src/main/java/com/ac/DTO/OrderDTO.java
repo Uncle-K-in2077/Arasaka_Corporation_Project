@@ -17,4 +17,5 @@ public class OrderDTO {
     private List<OrderDetailDTO> orderDetails;
     private int accountId;
     private String accountName;
+    private String email;
 }

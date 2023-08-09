@@ -22,6 +22,17 @@ const OrderService = {
     }
   },
 
+  async getOrderByAccountId(accountId) {
+    try {
+      const response = await AxiosService.get(`/order/account/${accountId}`);
+      // console.log(response);
+      return response.data;
+    } catch (error) {
+      console.log("Error fetching OrderByAccount", error);
+      throw error;
+    }
+  },
+
   async updateOrderById(orderId, orderStatus) {
     try {
       const response = await AxiosService.put(`/order/${orderId}`, orderStatus);

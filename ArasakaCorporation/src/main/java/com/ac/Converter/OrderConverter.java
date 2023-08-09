@@ -46,6 +46,7 @@ public class OrderConverter {
 		// Assuming you have accountId in the Order entity
 		orderDTO.setAccountId(order.getAccount().getId());
 		orderDTO.setAccountName(order.getAccount().getUsername());
+		orderDTO.setEmail(order.getAccount().getEmail());
 
 		// Assuming you have a method to convert OrderDetail entity to OrderDetailDTO
 		List<OrderDetailDTO> orderDetailDTOList = new ArrayList<>();

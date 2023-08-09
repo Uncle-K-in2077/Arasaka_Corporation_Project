@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { add, clear, remove, update } from "../redux/TempCartSlice";
 import { useEffect, useState } from "react";
 import { useRef } from "react";
-import { createNewOrder } from "../redux/orderSlice";
+import { createNewOrder, getAllOrder } from "../redux/orderSlice";
 import { status as dataStatus } from "../utils/dataStatus";
 
 import "../css/Cart.css";
@@ -15,6 +15,14 @@ function ShoppingCart() {
   const myCollapseRef = useRef(null);
 
   const cartData = useSelector((state) => state.cart.data);
+
+  const getAllOrderForAdmin = async () => {
+    try {
+      await dispatch(getAllOrder());
+    } catch (error) {
+      throw error;
+    }
+  };
 
   const orderStatus = useSelector((state) => state.order.status);
   console.log("orderStatus: ", orderStatus);
@@ -66,6 +74,7 @@ function ShoppingCart() {
         accountName: currentUser.username,
         phone: phone,
         address: address,
+        email: currentUser.email,
         note: note,
         createdAt: new Date(),
         amount: amount,
@@ -76,6 +85,7 @@ function ShoppingCart() {
       dispatch(clear());
       const btn = document.getElementById("resetBtn");
       btn.click();
+      getAllOrderForAdmin();
     } catch (error) {
       console.log(error);
     }
@@ -230,7 +240,7 @@ function ShoppingCart() {
         </div>
       </div>
       <hr />
-      <div className="collapse mb5 row" id="collapseExample">
+      <div className="collapse  mb5 row" id="collapseExample">
         <div className="col-8">
           <form
             onSubmit={checkOut}

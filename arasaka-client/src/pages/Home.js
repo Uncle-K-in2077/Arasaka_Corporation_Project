@@ -2,8 +2,17 @@
 
 import "../css/Home.css";
 import Header from "../component/Header";
+import HomeProducts from "../component/Home-Product";
+import { useEffect } from "react";
 
 function Home() {
+  useEffect(() => {
+    const sloganElement = document.querySelector(".typing-effect");
+    sloganElement.addEventListener("animationend", () => {
+      sloganElement.classList.remove("typing-effect");
+    });
+  }, []);
+
   return (
     <div className="home-container container">
       {/* background-video */}
@@ -22,100 +31,28 @@ function Home() {
       <Header />
 
       {/* Body */}
-      <div className="">
-        <h1>ARASAKA LANDING PAGE</h1>
-        <hr />
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi
-          quibusdam sunt quaerat ea similique voluptatum mollitia modi totam et
-          voluptatem necessitatibus distinctio ad asperiores, eum perspiciatis
-          accusantium amet. Dolores dicta eligendi asperiores ut deleniti quod
-          veniam, non voluptate velit, dolore beatae possimus fugit officiis
-          pariatur reprehenderit libero nemo doloremque nesciunt officia facilis
-          quis aspernatur sunt ipsa aperiam! Cumque dolor debitis recusandae,
-          esse doloremque iusto distinctio provident pariatur minima sit eum
-          omnis eaque laborum repellat tempore molestiae nemo, odit voluptates!
-          Iure, veniam reprehenderit quisquam asperiores ipsam fuga magnam
-          minima necessitatibus. Ullam nulla similique quis est a modi dolores
-          error mollitia quod.
-        </p>
-        <br />
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi
-          quibusdam sunt quaerat ea similique voluptatum mollitia modi totam et
-          voluptatem necessitatibus distinctio ad asperiores, eum perspiciatis
-          accusantium amet. Dolores dicta eligendi asperiores ut deleniti quod
-          veniam, non voluptate velit, dolore beatae possimus fugit officiis
-          pariatur reprehenderit libero nemo doloremque nesciunt officia facilis
-          quis aspernatur sunt ipsa aperiam! Cumque dolor debitis recusandae,
-          esse doloremque iusto distinctio provident pariatur minima sit eum
-          omnis eaque laborum repellat tempore molestiae nemo, odit voluptates!
-          Iure, veniam reprehenderit quisquam asperiores ipsam fuga magnam
-          minima necessitatibus. Ullam nulla similique quis est a modi dolores
-          error mollitia quod.
-        </p>
-        <br />
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi
-          quibusdam sunt quaerat ea similique voluptatum mollitia modi totam et
-          voluptatem necessitatibus distinctio ad asperiores, eum perspiciatis
-          accusantium amet. Dolores dicta eligendi asperiores ut deleniti quod
-          veniam, non voluptate velit, dolore beatae possimus fugit officiis
-          pariatur reprehenderit libero nemo doloremque nesciunt officia facilis
-          quis aspernatur sunt ipsa aperiam! Cumque dolor debitis recusandae,
-          esse doloremque iusto distinctio provident pariatur minima sit eum
-          omnis eaque laborum repellat tempore molestiae nemo, odit voluptates!
-          Iure, veniam reprehenderit quisquam asperiores ipsam fuga magnam
-          minima necessitatibus. Ullam nulla similique quis est a modi dolores
-          error mollitia quod.
-        </p>
-        <br />
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi
-          quibusdam sunt quaerat ea similique voluptatum mollitia modi totam et
-          voluptatem necessitatibus distinctio ad asperiores, eum perspiciatis
-          accusantium amet. Dolores dicta eligendi asperiores ut deleniti quod
-          veniam, non voluptate velit, dolore beatae possimus fugit officiis
-          pariatur reprehenderit libero nemo doloremque nesciunt officia facilis
-          quis aspernatur sunt ipsa aperiam! Cumque dolor debitis recusandae,
-          esse doloremque iusto distinctio provident pariatur minima sit eum
-          omnis eaque laborum repellat tempore molestiae nemo, odit voluptates!
-          Iure, veniam reprehenderit quisquam asperiores ipsam fuga magnam
-          minima necessitatibus. Ullam nulla similique quis est a modi dolores
-          error mollitia quod.
-        </p>
-        <br />
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi
-          quibusdam sunt quaerat ea similique voluptatum mollitia modi totam et
-          voluptatem necessitatibus distinctio ad asperiores, eum perspiciatis
-          accusantium amet. Dolores dicta eligendi asperiores ut deleniti quod
-          veniam, non voluptate velit, dolore beatae possimus fugit officiis
-          pariatur reprehenderit libero nemo doloremque nesciunt officia facilis
-          quis aspernatur sunt ipsa aperiam! Cumque dolor debitis recusandae,
-          esse doloremque iusto distinctio provident pariatur minima sit eum
-          omnis eaque laborum repellat tempore molestiae nemo, odit voluptates!
-          Iure, veniam reprehenderit quisquam asperiores ipsam fuga magnam
-          minima necessitatibus. Ullam nulla similique quis est a modi dolores
-          error mollitia quod.
-        </p>
-        <br />
-        <p>
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Commodi
-          quibusdam sunt quaerat ea similique voluptatum mollitia modi totam et
-          voluptatem necessitatibus distinctio ad asperiores, eum perspiciatis
-          accusantium amet. Dolores dicta eligendi asperiores ut deleniti quod
-          veniam, non voluptate velit, dolore beatae possimus fugit officiis
-          pariatur reprehenderit libero nemo doloremque nesciunt officia facilis
-          quis aspernatur sunt ipsa aperiam! Cumque dolor debitis recusandae,
-          esse doloremque iusto distinctio provident pariatur minima sit eum
-          omnis eaque laborum repellat tempore molestiae nemo, odit voluptates!
-          Iure, veniam reprehenderit quisquam asperiores ipsam fuga magnam
-          minima necessitatibus. Ullam nulla similique quis est a modi dolores
-          error mollitia quod.
-        </p>
-        <br />
+      <div className="row">
+        {/* <h1>ARASAKA LANDING PAGE</h1> */}
+        {/* <hr /> */}
+        <div className="col-2"></div>
+        <div className="carousel col-10">
+          <p className="home-slogan typing-effect">
+            I'VE SEEN THINGS YOU PEOPLE WOULDN'T BELIEVE. ALL THOSE MOMENTS WILL
+            BE LOST IN TIME, LIKE TEARS IN RAIN.
+          </p>
+        </div>
+        <div className="col-12 mb-5" style={{ textAlign: "center" }}>
+          <button className="customButton2">Keep scrolling</button>
+        </div>
       </div>
+
+      {/* Bread */}
+      <div className="breadcrumbs mb-5">
+        <h3 style={{ margin: "0" }} className="breadcrumb-title">
+          RELATED CYBERWARE
+        </h3>
+      </div>
+      <HomeProducts />
     </div>
   );
 }

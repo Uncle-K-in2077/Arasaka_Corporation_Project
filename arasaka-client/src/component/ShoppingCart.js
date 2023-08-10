@@ -106,8 +106,16 @@ function ShoppingCart() {
 
   return (
     <div className="noCss">
-      <h1>Your Shopping Cart</h1>
-      <button onClick={clearCart}>Clear Cart</button>
+      <div className="row" style={{ display: "flex", alignItems: "center" }}>
+        <div className="col-7">
+          <h1>Your Shopping Cart</h1>
+        </div>
+        <div className="col-5" style={{ textAlign: "right" }}>
+          <button className="customButton3" onClick={clearCart}>
+            Clear Cart
+          </button>
+        </div>
+      </div>
       <hr />
       <div className="row mb-3">
         <div className="col-8">

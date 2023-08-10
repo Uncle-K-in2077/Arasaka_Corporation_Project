@@ -568,6 +568,19 @@ body {
   margin: -60px auto !important;
 }
 
+.form_title-2 {
+  margin-top: -60px !important;
+  margin-bottom: -60px !important;
+  /* margin-right: 20px !important; */
+  text-align: right;
+}
+.form_title-3 {
+  margin-top: -60px !important;
+  margin-bottom: -50px !important;
+  /* margin-right: 20px !important; */
+  text-align: right;
+}
+
 .register-link {
   text-decoration: none !important;
   color: #e30000;
@@ -577,8 +590,7 @@ body {
   color: aliceblue;
 }
 
-/* Loading componet */
-/* .loading svg polyline {
+.loading svg polyline {
   fill: none;
   stroke-width: 3;
   stroke-linecap: round;
@@ -606,4 +618,4 @@ body {
   to {
     stroke-dashoffset: 0;
   }
-} */
+}

@@ -39,7 +39,7 @@ function Login() {
   useEffect(() => {
     //for outLook
     initResizeListener();
-    resizeOnLoad();
+    // resizeOnLoad();
 
     //for login function
     // handleSubmit();
@@ -101,15 +101,26 @@ function Login() {
             <div className="button__label">Continue</div>
             <div className="button__icon" />
           </button> */}
-        {/* <div className="form_title">
-          <h6>
-            Or continue as a{" "}
-            <Link className="register-link" to="/">
-              {" "}
-              GUESS
-            </Link>
-          </h6>
-        </div> */}
+        <div
+          className="form_title-2 row"
+          style={{ display: "flex", alignItems: "center" }}
+        >
+          <div
+            className="col-6"
+            style={{
+              height: "1px",
+              backgroundColor: "red",
+              marginLeft: "13px",
+            }}
+          ></div>
+          <div className="col-5" style={{ padding: "0" }}>
+            <h6 className="mb-0">
+              <Link className="register-link" to="/fogotPassword">
+                FORGOT PASSWORD?
+              </Link>
+            </h6>
+          </div>
+        </div>
 
         <button type="submit" className="cybr-btn">
           Let's Go<span aria-hidden>_</span>

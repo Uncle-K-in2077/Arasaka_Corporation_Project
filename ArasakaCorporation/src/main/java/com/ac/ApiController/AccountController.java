@@ -18,6 +18,7 @@ import com.ac.Converter.AccountConverter;
 import com.ac.DTO.AccountDTO;
 import com.ac.Entities.Account;
 import com.ac.Repository.AccountRepository;
+import com.ac.Service.BCryptService;
 
 @RestController
 @RequestMapping("/api/account")
@@ -29,6 +30,8 @@ public class AccountController {
 	@Autowired
 	AccountConverter accountConverter;
 	
+	@Autowired
+	BCryptService bCrypService;
 	
 	@GetMapping
 	public ResponseEntity<List<AccountDTO>> getAll(){
@@ -49,7 +52,9 @@ public class AccountController {
 	@PostMapping
 	public ResponseEntity<AccountDTO> create(@RequestBody AccountDTO item){
 		try {
+			
 			Account account = accountConverter.toAccount(item);
+			account.setPassword(bCrypService.hashPassword(item.getPassword()));
 			Account savedAccount = accountRepository.save(account);
 			return new ResponseEntity<>(accountConverter.toAccountDTO(savedAccount), HttpStatus.CREATED);
 		} catch (Exception e) {
@@ -71,7 +76,7 @@ public class AccountController {
 //			User permission
 			existingAccount.setEmail(item.getEmail());
 			existingAccount.setUsername(item.getUsername());
-			existingAccount.setPassword(item.getPassword());
+			existingAccount.setPassword(bCrypService.hashPassword(item.getPassword()));
 			System.out.println(existingAccount);
 			Account updatedAccount = accountRepository.save(existingAccount);
 			return new ResponseEntity<>(accountConverter.toAccountDTO(updatedAccount), HttpStatus.OK);

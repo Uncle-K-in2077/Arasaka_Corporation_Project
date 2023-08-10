@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import Product from "./pages/Product";
 import Cart from "./pages/Cart";
 import AccountProfile from "./pages/AccountProfilePage";
+import FogotPassword from "./component/FogotPassword";
 
 const About = () => <h1>Giới thiệu</h1>;
 
@@ -34,6 +35,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/admin/*" element={<AdminPages />} />
         <Route path="/account/*" element={<AccountProfile />} />
+        <Route path="/fogotPassword" element={<FogotPassword />} />
       </Routes>
     </div>
   );

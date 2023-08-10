@@ -82,10 +82,26 @@ export const refresh = createAsyncThunk(
   }
 );
 
+export const sendOTP = createAsyncThunk(
+  "authen/sendOTP",
+  async ({ accountEmail }, thunkAPI) => {
+    try {
+      const response = await LoginService.senOTP(accountEmail);
+      // console.log("Slice response: ", response);
+      return response;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
 const initialState = {
   currentUser: null,
   data: [],
   status: "",
+  otpStatus: "",
+  loading: false,
+  realEmail: false,
 };
 
 const accountSlice = createSlice({
@@ -121,6 +137,22 @@ const accountSlice = createSlice({
       .addCase(logOut.fulfilled, (state, action) => {
         state.status = dataStatus.SUCCESS;
         state.data = action.payload;
+      })
+      .addCase(sendOTP.pending, (state) => {
+        state.status = dataStatus.LOADING;
+        state.loading = true;
+      })
+      .addCase(sendOTP.rejected, (state) => {
+        state.status = dataStatus.ERROR;
+        state.data = null;
+        state.loading = false;
+        state.realEmail = false;
+      })
+      .addCase(sendOTP.fulfilled, (state, action) => {
+        state.status = dataStatus.SUCCESS;
+        state.data = action.payload;
+        state.loading = false;
+        state.realEmail = true;
       });
   },
 });

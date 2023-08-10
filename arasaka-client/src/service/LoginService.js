@@ -21,7 +21,7 @@ const LoginService = {
       throw error;
     }
   },
-  
+
   async refresh() {
     try {
       const response = await AxiosService.post("/login/refresh", {
@@ -31,6 +31,18 @@ const LoginService = {
     } catch (error) {
       console.error("Error during login: ", error);
       throw error;
+    }
+  },
+
+  async senOTP(accountEmail) {
+    try {
+      const response = await AxiosService.post("/login/forgot-password", {
+        verifyEmail: accountEmail,
+      });
+      // console.log("OTP: ", response);
+      return response.data;
+    } catch (error) {
+      console.log("Error during sending OTP: ", error);
     }
   },
 };

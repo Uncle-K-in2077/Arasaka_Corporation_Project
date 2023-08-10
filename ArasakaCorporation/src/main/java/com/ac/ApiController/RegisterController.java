@@ -15,6 +15,7 @@ import com.ac.DTO.RegisterResponseDTO;
 import com.ac.Entities.Account;
 import com.ac.Repository.AccountRepository;
 import com.ac.Service.AccountService;
+import com.ac.Service.BCryptService;
 import com.ac.Service.JWTService;
 
 @RestController
@@ -33,6 +34,8 @@ public class RegisterController {
 	@Autowired
 	AccountRepository accountRepository;
 	
+	@Autowired
+	BCryptService bCrypService;
 	
 	@PostMapping
 	public ResponseEntity<?> register(@RequestBody RegisterAccountDTO account){
@@ -47,11 +50,12 @@ public class RegisterController {
 			
 			AccountDTO newDTO = new AccountDTO();
 			newDTO.setEmail(account.getEmail());
-			newDTO.setPassword(account.getPassword());
+//			newDTO.setPassword(account.getPassword());
 			newDTO.setUsername(account.getUsername());
 			newDTO.setStatus(1);
 			newDTO.setRole(1);
-			
+			newDTO.setPassword(bCrypService.hashPassword(account.getPassword()));
+			System.out.println("password after hash: " + newDTO.getPassword());
 			Account newAccount = accountConverter.toAccount(newDTO);
 			Account saved = accountRepository.save(newAccount);
 			

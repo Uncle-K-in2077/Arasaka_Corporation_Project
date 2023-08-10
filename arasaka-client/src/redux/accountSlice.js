@@ -12,6 +12,7 @@ export const registerAccount = createAsyncThunk(
     return results;
   }
 );
+
 export const updateAccount = createAsyncThunk(
   "account/update",
   async ({ accountId, status, role, username, email, password }) => {

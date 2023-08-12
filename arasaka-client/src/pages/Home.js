@@ -3,7 +3,6 @@
 import "../css/Home.css";
 import Header from "../component/Header";
 import HomeProducts from "../component/Home-Product";
-import { useEffect } from "react";
 
 function Home() {
   return (

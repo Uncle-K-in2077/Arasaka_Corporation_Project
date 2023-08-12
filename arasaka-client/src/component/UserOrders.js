@@ -54,7 +54,7 @@ function UserOrders() {
   };
   useEffect(() => {
     getAllOrderByAccountId(idAccount);
-  }, [idAccount]);
+  }, [idAccount, getAllOrderByAccountId]);
 
   return (
     <div className="row">

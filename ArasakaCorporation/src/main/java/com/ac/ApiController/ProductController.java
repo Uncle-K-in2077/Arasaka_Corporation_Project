@@ -7,6 +7,9 @@ import java.util.Optional;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -35,9 +38,6 @@ import com.ac.Repository.CategoryRepository;
 import com.ac.Repository.ProductRepository;
 import com.ac.Service.JWTService;
 import com.ac.Service.UploadService;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
-import org.json.simple.parser.ParseException;
 
 @RestController
 @RequestMapping("/api/product")
@@ -369,6 +369,15 @@ public class ProductController {
 	    Product updated = productRepository.save(productEntity);
 	    return new ResponseEntity<>(productConverter.toDTO(updated), HttpStatus.OK);
 	}
+	
+//	@PostMapping("/uploadfile")
+//	public ResponseEntity<?> uploadExcelFile(@RequestParam("excelFile") MultipartFile excelFile){
+//		try {
+//			
+//		} catch (Exception e) {
+//			System.out.println(e.getMessage());
+//		}
+//	}
 	
 	
 	

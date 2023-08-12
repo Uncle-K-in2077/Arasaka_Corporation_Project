@@ -9,12 +9,17 @@ import { useRef } from "react";
 import { createNewOrder, getAllOrder } from "../redux/orderSlice";
 import { status as dataStatus } from "../utils/dataStatus";
 
+import Toast from "./Toast";
+
 import "../css/Cart.css";
+import { useNavigate } from "react-router-dom";
 
 function ShoppingCart() {
   const myCollapseRef = useRef(null);
 
   const cartData = useSelector((state) => state.cart.data);
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState("");
 
   const getAllOrderForAdmin = async () => {
     try {
@@ -29,6 +34,7 @@ function ShoppingCart() {
 
   console.log("Carrt", cartData);
   const currentUser = useSelector((state) => state.auth?.currentUser);
+
   const [amount, setAmount] = useState(0);
   const [totalElement, setTotalElement] = useState(0);
   const [phone, setPhone] = useState("");
@@ -83,6 +89,8 @@ function ShoppingCart() {
       };
       dispatch(createNewOrder(orderDTO));
       dispatch(clear());
+      setToastMessage("Your order created successfully");
+      setShowToast(true);
       const btn = document.getElementById("resetBtn");
       btn.click();
       getAllOrderForAdmin();
@@ -247,6 +255,7 @@ function ShoppingCart() {
           </div>
         </div>
       </div>
+
       <hr />
       <div className="collapse  mb5 row" id="collapseExample">
         <div className="col-8">
@@ -338,8 +347,15 @@ function ShoppingCart() {
       </div>
       <br />
       <hr />
-      <hr />
-      <hr />
+      {showToast ? (
+        <Toast
+          className="bg-danger"
+          title="Notification"
+          message={toastMessage}
+        />
+      ) : (
+        ""
+      )}
     </div>
   );
 }

@@ -1,32 +1,33 @@
 /** @format */
 
 import { Link } from "react-router-dom";
+import "../css/Product.css";
 
 function SideBerMenu() {
   return (
-    <>
-      <ul className="list-group">
-        <Link to="/admin/product">
-          <li className="list-group-item">Product</li>
+    <div className="side-bar">
+      <ul className="list-group side-bar-item">
+        <Link to="/admin/product" className="side-bar-item">
+          <li>Product</li>
         </Link>
-        <Link to="/admin/category">
-          <li className="list-group-item">Category</li>
+        <Link to="/admin/category" className="side-bar-item">
+          <li>Category</li>
         </Link>
         <Link to="/admin/account">
-          <li className="list-group-item">Account</li>
+          <li>Account</li>
         </Link>
         <Link to="/admin/order">
-          <li className="list-group-item">Order</li>
+          <li>Order</li>
         </Link>
-        <Link to="/admin/report">
+        {/* <Link to="/admin/report">
           <li className="list-group-item">Report</li>
-        </Link>
+        </Link> */}
         <hr />
         <Link to="/">
-          <li className="list-group-item">To HomePage</li>
+          <li>To HomePage</li>
         </Link>
       </ul>
-    </>
+    </div>
   );
 }
 

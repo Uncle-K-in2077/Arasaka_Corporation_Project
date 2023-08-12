@@ -6,13 +6,6 @@ import HomeProducts from "../component/Home-Product";
 import { useEffect } from "react";
 
 function Home() {
-  useEffect(() => {
-    const sloganElement = document.querySelector(".typing-effect");
-    sloganElement.addEventListener("animationend", () => {
-      sloganElement.classList.remove("typing-effect");
-    });
-  }, []);
-
   return (
     <div className="home-container container">
       {/* background-video */}
@@ -35,8 +28,8 @@ function Home() {
         {/* <h1>ARASAKA LANDING PAGE</h1> */}
         {/* <hr /> */}
         <div className="col-2"></div>
-        <div className="carousel col-10">
-          <p className="home-slogan typing-effect">
+        <div className="carousel col-10 fade-in-text">
+          <p className="home-slogan ">
             I'VE SEEN THINGS YOU PEOPLE WOULDN'T BELIEVE. ALL THOSE MOMENTS WILL
             BE LOST IN TIME, LIKE TEARS IN RAIN.
           </p>

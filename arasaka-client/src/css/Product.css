@@ -215,3 +215,26 @@ a {
   margin-left: 15px !important;
   cursor: pointer !important;
 }
+.side-bar {
+  font-size: 35px !important;
+  text-transform: uppercase !important;
+  font-family: Rajdhani, sans-serif !important;
+  line-height: 1.5em !important;
+  font-weight: 700 !important;
+  vertical-align: baseline !important;
+  letter-spacing: -0.04em !important;
+  background-color: transparent !important;
+}
+.side-bar-item {
+  font-size: 35px !important;
+  text-transform: uppercase !important;
+  font-family: Rajdhani, sans-serif !important;
+  line-height: 1.5em !important;
+  font-weight: 700 !important;
+  vertical-align: baseline !important;
+  letter-spacing: -0.04em !important;
+}
+.side-bar-item:hover {
+  color: #ec4e00 !important;
+  cursor: pointer !important;
+}

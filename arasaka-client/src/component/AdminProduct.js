@@ -83,6 +83,7 @@ function AdminProduct() {
       [name]: value,
     }));
   };
+
   useEffect(() => {});
 
   return (
@@ -178,15 +179,7 @@ function AdminProduct() {
           >
             New Product +
           </button>
-          <p
-            style={{
-              color: "#FE5000",
-              marginTop: "-10px",
-              marginBottom: "-10px",
-            }}
-          >
-            {notifi ? notifi : <></>}
-          </p>
+          {/* <ExcelUpload onFileUpload={handleUploadExcelFiles} /> */}
         </div>
       </div>
 

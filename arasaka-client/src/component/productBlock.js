@@ -5,14 +5,21 @@ import "../css/Product.css";
 import { useState } from "react";
 import { add } from "../redux/TempCartSlice";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function ProductBlock() {
   const ProductData = useSelector((state) => state.product.data);
   const categoryData = useSelector((state) => state.category.data);
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const addToCart = (product) => {
+    const currentUser = localStorage.getItem("currentUser");
+    if (currentUser === null || currentUser === undefined) {
+      navigate("/login");
+      return;
+    }
     dispatch(add(product));
   };
 

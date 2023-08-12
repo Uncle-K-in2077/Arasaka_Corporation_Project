@@ -4,13 +4,13 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { sendOTP } from "../redux/authenSlice";
 import { useEffect, useState } from "react";
-import { status as dataStatus } from "./../utils/dataStatus";
+// import { status as dataStatus } from "./../utils/dataStatus";
 
 function FogotPassword() {
   const dispatch = useDispatch();
 
   const loading = useSelector((state) => state.auth.loading);
-  const realEmail = useSelector((state) => state.auth.realEmail);
+  // const otpStatus = useSelector((state) => state.auth.otpStatus);
 
   const [userEmail, setUserEmail] = useState("");
 
@@ -111,25 +111,21 @@ function FogotPassword() {
           </div>
         </div>
 
-        <div
+        {/* <div
           className="form_title-3 row"
           style={{ display: "flex", alignItems: "center" }}
         >
-          {realEmail === true ? (
+          {otpStatus === dataStatus.LOADING && <div>Loading...</div>}
+          {otpStatus === dataStatus.SUCCESS && (
             <div>
-              <h6>
+              <h6 style={{ textAlign: "left" }}>
                 Your <span className="register-link">New Password</span> had
                 been sended to your Email!
               </h6>
             </div>
-          ) : (
-            <div>
-              <h6>
-                We <span className="register-link">Can't </span>find your Email!
-              </h6>
-            </div>
           )}
-        </div>
+          {otpStatus === dataStatus.ERROR && <div>Error sending OTP.</div>}
+        </div> */}
 
         <button type="submit" className="cybr-btn">
           GET NEW PASSWORD<span aria-hidden>_</span>

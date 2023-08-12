@@ -142,9 +142,10 @@ public class LoginController {
 	    Optional<Account> verifyAccount = accountRepository.findByEmail(verifyEmail);
 	    if (!verifyAccount.isPresent() || verifyAccount.isEmpty()) {
 	    	System.out.println("Email not found 404");
-	    	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    	return new ResponseEntity<>(null, HttpStatus.NOT_FOUND);
 	    }
-
+	    
+//	    System.out.println("check");
 	    // Generate and store OTP code
 	    String newPassword = generateRandomString();
 	    Account acc = verifyAccount.get();

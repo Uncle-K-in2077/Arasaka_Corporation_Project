@@ -15,7 +15,7 @@ import { clear } from "./TempCartSlice";
 
 // Log out
 export const logOut = createAsyncThunk(
-  "authen/logOut",
+  "auth/logOut",
   async ({ dispatch, navigate }, thunkAPI) => {
     try {
       localStorage.removeItem("token");
@@ -36,7 +36,7 @@ export const logOut = createAsyncThunk(
 
 // LOGIN
 export const login = createAsyncThunk(
-  "authen/login",
+  "auth/login",
   async ({ email, password, dispatch, navigate }, thunkAPI) => {
     try {
       const response = await LoginService.login(email, password);
@@ -58,7 +58,7 @@ export const login = createAsyncThunk(
 );
 
 export const refresh = createAsyncThunk(
-  "authen/refresh",
+  "auth/refresh",
   async ({ dispatch, navigate }, thunkAPI) => {
     try {
       if (localStorage.getItem("token") === null) {
@@ -83,11 +83,11 @@ export const refresh = createAsyncThunk(
 );
 
 export const sendOTP = createAsyncThunk(
-  "authen/sendOTP",
+  "auth/sendOTP",
   async ({ accountEmail }, thunkAPI) => {
     try {
       const response = await LoginService.senOTP(accountEmail);
-      // console.log("Slice response: ", response);
+      console.log("Slice response: ", response);
       return response;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -99,13 +99,14 @@ const initialState = {
   currentUser: null,
   data: [],
   status: "",
+  loginStatus: "",
   otpStatus: "",
   loading: false,
   realEmail: false,
 };
 
 const accountSlice = createSlice({
-  name: "authen",
+  name: "auth",
   initialState,
   reducers: {
     loginSuccess: (state, action) => {
@@ -115,14 +116,21 @@ const accountSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(login.pending, (state) => {
+        state.loginStatus = dataStatus.LOADING;
         state.status = dataStatus.LOADING;
+        state.loading = true;
       })
       .addCase(login.fulfilled, (state, action) => {
+        state.loginStatus = dataStatus.SUCCESS;
         state.status = dataStatus.SUCCESS;
+        state.loading = false;
         state.currentUser = action.payload.account;
       })
       .addCase(login.rejected, (state, action) => {
+        state.loginStatus = dataStatus.ERROR;
         state.status = dataStatus.ERROR;
+        state.loading = false;
+        state.data = null;
       })
       .addCase(refresh.pending, (state) => {
         state.status = dataStatus.LOADING;
@@ -139,17 +147,17 @@ const accountSlice = createSlice({
         state.data = action.payload;
       })
       .addCase(sendOTP.pending, (state) => {
-        state.status = dataStatus.LOADING;
+        state.otpStatus = dataStatus.LOADING;
         state.loading = true;
       })
       .addCase(sendOTP.rejected, (state) => {
-        state.status = dataStatus.ERROR;
+        state.otpStatus = dataStatus.ERROR;
         state.data = null;
         state.loading = false;
         state.realEmail = false;
       })
       .addCase(sendOTP.fulfilled, (state, action) => {
-        state.status = dataStatus.SUCCESS;
+        state.otpStatus = dataStatus.SUCCESS;
         state.data = action.payload;
         state.loading = false;
         state.realEmail = true;

@@ -92,17 +92,18 @@
   visibility: visible !important;
   padding-top: 2.5em !important;
 }
-.typing-effect {
-  overflow: hidden !important; /* Ẩn phần vượt ra khỏi khung */
-  white-space: nowrap !important; /* Ngăn chữ xuống dòng */
-  animation: typing 4s linear !important;
+@keyframes fadeInText {
+  0% {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 
-@keyframes typing {
-  from {
-    width: 0 !important; /* Bắt đầu từ chiều rộng 0 */
-  }
-  to {
-    width: 100% !important; /* Kết thúc với chiều rộng 100% */
-  }
+.fade-in-text {
+  opacity: 0; /* Bắt đầu với độ mờ */
+  animation: fadeInText 0.5s ease-in-out 1.2s forwards; /* Chạy hiệu ứng trong 1 giây */
 }

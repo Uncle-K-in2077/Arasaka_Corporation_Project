@@ -15,16 +15,22 @@ export const registerAccount = createAsyncThunk(
 
 export const updateAccount = createAsyncThunk(
   "account/update",
-  async ({ accountId, status, role, username, email, password }) => {
-    const response = await AccountService.updateAccount(accountId, {
-      status,
-      role,
-      username,
-      email,
-      password,
-    });
-    const results = await response.data;
-    return results;
+  async ({ accountId, status, role, username, email, password }, thunkAPI) => {
+    try {
+      const response = await AccountService.updateAccount(accountId, {
+        status,
+        role,
+        username,
+        email,
+        password,
+      });
+      const results = await response.data;
+      console.log(results);
+      return results;
+    } catch (error) {
+      console.log(error);
+      return thunkAPI.rejectWithValue(error.message);
+    }
   }
 );
 

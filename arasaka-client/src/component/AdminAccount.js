@@ -30,11 +30,11 @@ function AdminAccount() {
     }
   }
 
-  const updateAccountFunction = async (e) => {
+  const updateAccountFunction = (e) => {
     e.preventDefault();
     try {
       const { id, status, role, username, email, password } = accountUD;
-      const res = await dispatch(
+      dispatch(
         updateAccount({
           accountId: id,
           status,
@@ -44,8 +44,7 @@ function AdminAccount() {
           password,
         })
       );
-      console.log(res);
-      console.log("update Account success");
+
       setToastMessage("Update account success");
       setShowToast(true);
       const btn = document.getElementById(`closeBtn${id}`);
@@ -137,9 +136,7 @@ function AdminAccount() {
             </tr>
           </thead>
           <tbody>
-            {accountData === undefined ? (
-              <div>Loading...</div>
-            ) : accountData.length === 0 ? (
+            {!accountData ? (
               <div>No Account found</div>
             ) : (
               accountData.map((account) => {

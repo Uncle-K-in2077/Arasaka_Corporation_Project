@@ -5,7 +5,7 @@ import AxiosService from "./AxiosService";
 const ProductService = {
   async getAllProducts() {
     try {
-      const response = await AxiosService.get("/product");
+      const response = await AxiosService.get("api/product");
       return response;
     } catch (error) {
       console.error("Error fetching products:", error);

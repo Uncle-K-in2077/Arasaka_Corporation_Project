@@ -59,7 +59,7 @@ const AccountService = {
   async updateAccount(accountId, accountData) {
     try {
       const response = await AxiosService.put(
-        `/account/${accountId}`,
+        `api/account/${accountId}`,
         accountData
       );
       return response;

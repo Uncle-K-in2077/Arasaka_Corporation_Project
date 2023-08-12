@@ -1,0 +1,29 @@
+# Sử dụng image cơ sở có Node.js đã cài đặt
+FROM node:14 AS build
+
+# Thiết lập thư mục làm việc trong container
+WORKDIR /app
+
+# Copy package.json và package-lock.json vào thư mục làm việc
+COPY package*.json ./
+
+# Cài đặt các dependencies
+RUN npm install
+
+# Copy toàn bộ mã nguồn của dự án vào thư mục làm việc
+COPY . .
+
+# Build ứng dụng React
+RUN npm run build
+
+# Sử dụng image cơ sở có Nginx để phục vụ ứng dụng đã build
+FROM nginx:alpine
+
+# Copy các tệp tĩnh đã build từ container build vào thư mục của Nginx
+COPY --from=build /app/build /usr/share/nginx/html
+
+# Expose cổng 80 để cho truy cập HTTP
+EXPOSE 80
+
+# Lệnh chạy khi container được khởi động
+CMD ["nginx", "-g", "daemon off;"]

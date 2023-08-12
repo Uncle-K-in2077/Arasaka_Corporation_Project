@@ -5,10 +5,9 @@ import axios from "axios";
 const uploadService = {
   save: async (file) => {
     try {
-      const baseURL =
-        process.env.REACT_APP_API_URL || "http://localhost:8080/api";
+      const baseURL = process.env.REACT_APP_API_URL;
       const res = await axios.post(
-        baseURL + "/upload",
+        baseURL + "api/upload",
         {
           img: file,
         },

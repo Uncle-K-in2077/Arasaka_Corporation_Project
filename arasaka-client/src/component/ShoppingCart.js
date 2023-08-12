@@ -135,7 +135,7 @@ function ShoppingCart() {
                   <div className="row d-flex justify-content-between align-items-center">
                     <div className="col-md-2 col-lg-2 col-xl-2">
                       <img
-                        src={"http://localhost:8080/" + item.image}
+                        src={process.env.REACT_APP_API_URL + item.image}
                         className="img-fluid cart-img"
                         alt="Cotton T-shirt"
                       />

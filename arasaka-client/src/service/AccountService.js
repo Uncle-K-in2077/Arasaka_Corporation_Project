@@ -5,7 +5,7 @@ import AxiosService from "./AxiosService";
 const AccountService = {
   async getAllAccounts() {
     try {
-      const response = await AxiosService.get("/account");
+      const response = await AxiosService.get("api/account");
 
       if (response.status === 200) {
         // Lấy danh sách tài khoản thành công, trả về danh sách các tài khoản
@@ -22,7 +22,7 @@ const AccountService = {
 
   async login(email, password) {
     try {
-      const response = await AxiosService.post("/login", {
+      const response = await AxiosService.post("api/login", {
         email: email,
         password: password,
       });
@@ -42,7 +42,7 @@ const AccountService = {
 
   async register(userInfo) {
     try {
-      const response = await AxiosService.post("/register", userInfo);
+      const response = await AxiosService.post("api/register", userInfo);
 
       if (response.status === 201) {
         // Đăng ký thành công, trả về thông tin người dùng đã đăng ký
@@ -70,7 +70,7 @@ const AccountService = {
 
   async getUserProfile(accountId) {
     try {
-      const response = await AxiosService.get(`/account/${accountId}`);
+      const response = await AxiosService.get(`api/account/${accountId}`);
 
       if (response.status === 200) {
         // Lấy thông tin người dùng thành công, trả về thông tin người dùng

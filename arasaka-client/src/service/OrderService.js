@@ -4,7 +4,7 @@ import AxiosService from "./AxiosService";
 const OrderService = {
   async getAllOrders() {
     try {
-      const response = await AxiosService.get("/order");
+      const response = await AxiosService.get("api/order");
       return response;
     } catch (error) {
       console.error("Error fetching Order:", error);
@@ -14,7 +14,7 @@ const OrderService = {
 
   async getOrderById(orderId) {
     try {
-      const response = await AxiosService.get(`/order/${orderId}`);
+      const response = await AxiosService.get(`api/order/${orderId}`);
       return response.data;
     } catch (error) {
       console.error("Error fetching Order:", error);
@@ -24,7 +24,7 @@ const OrderService = {
 
   async getOrderByAccountId(accountId) {
     try {
-      const response = await AxiosService.get(`/order/account/${accountId}`);
+      const response = await AxiosService.get(`api/order/account/${accountId}`);
       // console.log(response);
       return response.data;
     } catch (error) {
@@ -35,7 +35,10 @@ const OrderService = {
 
   async updateOrderById(orderId, orderStatus) {
     try {
-      const response = await AxiosService.put(`/order/${orderId}`, orderStatus);
+      const response = await AxiosService.put(
+        `api/order/${orderId}`,
+        orderStatus
+      );
       return response.data;
     } catch (error) {
       console.error(`Error updating product with ID ${orderId}:`, error);
@@ -45,7 +48,7 @@ const OrderService = {
 
   async createOrder(orderDTO) {
     try {
-      const response = await AxiosService.post("/order/", orderDTO);
+      const response = await AxiosService.post("api/order/", orderDTO);
       return response.data;
     } catch (error) {
       throw error;

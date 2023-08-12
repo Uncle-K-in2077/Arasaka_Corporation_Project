@@ -191,7 +191,7 @@ function ProductBlock() {
                         className="product-img"
                         id="img-product"
                         style={{ width: "100%" }}
-                        src={"http://localhost:8080/" + product.image}
+                        src={process.env.REACT_APP_API_URL + product.image}
                         alt="/"
                       />
                       <div className="atcBtn">

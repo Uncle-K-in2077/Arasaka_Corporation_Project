@@ -97,10 +97,10 @@ public class ProductController {
 		String method = request.getMethod();
 		HttpServletRequest httpRequest = (HttpServletRequest) request;
 
-		String authToken = httpRequest.getHeader(TOKEN_HEADER);
-		if (jwtService.validateTokenLogin(authToken) == false) {
-			return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
-		}
+//		String authToken = httpRequest.getHeader(TOKEN_HEADER);
+//		if (jwtService.validateTokenLogin(authToken) == false) {
+//			return new ResponseEntity<>(null, HttpStatus.FORBIDDEN);
+//		}
 
 //		try {
 			if (page < 1) {

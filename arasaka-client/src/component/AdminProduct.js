@@ -362,7 +362,7 @@ function AdminProduct() {
                       <td>
                         <img
                           style={{ width: "200px" }}
-                          src={"http://localhost:8080/" + product.image}
+                          src={process.env.REACT_APP_API_URL + product.image}
                           alt="/"
                         />
                       </td>

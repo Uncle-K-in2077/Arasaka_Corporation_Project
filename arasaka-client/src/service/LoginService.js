@@ -5,7 +5,7 @@ import AxiosService from "./AxiosService";
 const LoginService = {
   async login(email, password) {
     try {
-      const response = await AxiosService.post("/login", {
+      const response = await AxiosService.post("api/login", {
         email: email,
         password: password,
       });
@@ -24,7 +24,7 @@ const LoginService = {
 
   async refresh() {
     try {
-      const response = await AxiosService.post("/login/refresh", {
+      const response = await AxiosService.post("api/login/refresh", {
         token: localStorage.getItem("token"),
       });
       return response.data;
@@ -36,7 +36,7 @@ const LoginService = {
 
   async senOTP(accountEmail) {
     try {
-      const response = await AxiosService.post("/login/forgot-password", {
+      const response = await AxiosService.post("api/login/forgot-password", {
         verifyEmail: accountEmail,
       });
       // console.log("OTP: ", response);

@@ -13,10 +13,9 @@ const ProductService = {
     }
   },
 
-
   async getProductById(productId) {
     try {
-      const response = await AxiosService.get(`/product/${productId}`);
+      const response = await AxiosService.get(`api/product/${productId}`);
       return response.data;
     } catch (error) {
       console.error(`Error fetching product with ID ${productId}:`, error);
@@ -26,7 +25,7 @@ const ProductService = {
 
   async createProduct(productData) {
     try {
-      const response = await AxiosService.post("/product", productData);
+      const response = await AxiosService.post("api/product", productData);
       return response.data;
     } catch (error) {
       console.error("Error creating product:", error);
@@ -37,7 +36,7 @@ const ProductService = {
   async updateProduct(productId, productData) {
     try {
       const response = await AxiosService.put(
-        `/product/${productId}`,
+        `api/product/${productId}`,
         productData
       );
       return response.data;
@@ -49,7 +48,7 @@ const ProductService = {
 
   async deleteProduct(productId) {
     try {
-      const response = await AxiosService.delete(`/product/${productId}`);
+      const response = await AxiosService.delete(`api/product/${productId}`);
       return response.data;
     } catch (error) {
       console.error(`Error deleting product with ID ${productId}:`, error);
@@ -59,7 +58,9 @@ const ProductService = {
 
   async restoreProduct(productId) {
     try {
-      const response = await AxiosService.put(`/product/${productId}/restore`);
+      const response = await AxiosService.put(
+        `api/product/${productId}/restore`
+      );
       return response.data;
     } catch (error) {
       console.error(`Error restoring product with ID ${productId}:`, error);

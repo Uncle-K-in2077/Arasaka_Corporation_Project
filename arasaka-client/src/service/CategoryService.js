@@ -5,7 +5,7 @@ import AxiosService from "./AxiosService";
 const CategoryService = {
   async findAll() {
     try {
-      const response = await AxiosService.get("/category");
+      const response = await AxiosService.get("api/category");
       return response;
     } catch (error) {
       console.error("Error during login: ", error);
@@ -15,7 +15,7 @@ const CategoryService = {
 
   async findById(categoryId) {
     try {
-      const response = await AxiosService.get(`/category/${categoryId}`);
+      const response = await AxiosService.get(`api/category/${categoryId}`);
       return response;
     } catch (error) {
       throw error;
@@ -25,7 +25,7 @@ const CategoryService = {
   async updateCategory(categoryId, categoryData) {
     try {
       const response = await AxiosService.put(
-        `/category/${categoryId}`,
+        `api/category/${categoryId}`,
         categoryData
       );
       return response;
@@ -36,7 +36,7 @@ const CategoryService = {
 
   async createCategory(categoryData) {
     try {
-      const response = await AxiosService.post("category", categoryData);
+      const response = await AxiosService.post("api/category", categoryData);
       return response;
     } catch (error) {
       throw error;

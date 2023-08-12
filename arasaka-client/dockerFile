@@ -1,5 +1,5 @@
 # Sử dụng image cơ sở có Node.js đã cài đặt
-FROM node:14 AS build
+FROM node:16 AS build
 
 # Thiết lập thư mục làm việc trong container
 WORKDIR /app

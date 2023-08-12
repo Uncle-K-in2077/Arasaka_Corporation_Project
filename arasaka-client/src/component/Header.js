@@ -40,11 +40,11 @@ function Header() {
                   <li className="nav-link">SHOP</li>
                 </Link>
               </li>
-              <li className="nav-item">
+              {/* <li className="nav-item disable">
                 <Link to="/shop">
-                  <li className="nav-link">ABOUT US</li>
+                  <li className="nav-link ">ABOUT US</li>
                 </Link>
-              </li>
+              </li> */}
               <li className="nav-item">
                 <Link to="/cart">
                   <li className="nav-link">CART({cartData.length})</li>

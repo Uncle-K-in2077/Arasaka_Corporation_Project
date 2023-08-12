@@ -1,4 +1,4 @@
-# Sử dụng image cơ sở có Node.js đã cài đặt
+# Bước 1: Xây dựng image dựa trên Node.js để build dự án React
 FROM node:16 AS build
 
 # Thiết lập thư mục làm việc trong container
@@ -16,7 +16,7 @@ COPY . .
 # Build ứng dụng React
 RUN npm run build
 
-# Sử dụng image cơ sở có Nginx để phục vụ ứng dụng đã build
+# Bước 2: Xây dựng image dựa trên nginx để phục vụ ứng dụng đã build
 FROM nginx:alpine
 
 # Copy các tệp tĩnh đã build từ container build vào thư mục của Nginx

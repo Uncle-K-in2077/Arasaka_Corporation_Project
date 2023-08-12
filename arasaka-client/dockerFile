@@ -1,29 +1,29 @@
-# Bước 1: Xây dựng image dựa trên Node.js để build dự án React
-FROM node:16 AS build
+# Sử dụng image chứa Node.js và npm
+FROM node:16
 
-# Thiết lập thư mục làm việc trong container
+# Đặt thư mục làm việc trong container
 WORKDIR /app
 
-# Copy package.json và package-lock.json vào thư mục làm việc
+# Sao chép package.json và package-lock.json vào thư mục làm việc
 COPY package*.json ./
 
-# Cài đặt các dependencies
-RUN npm install
+# Tắt cảnh báo từ npm install
+RUN npm install --no-warnings
 
-# Copy toàn bộ mã nguồn của dự án vào thư mục làm việc
+# Sao chép các tệp dự án vào thư mục làm việc
 COPY . .
+
+# Tắt kiểm tra lỗ hổng bảo mật và cài đặt gói
+RUN npm install --legacy-peer-deps
+
+# Tạo biến môi trường để bỏ qua kiểm tra ESLint
+ENV SKIP_PREFLIGHT_CHECK=true
 
 # Build ứng dụng React
 RUN npm run build
 
-# Bước 2: Xây dựng image dựa trên nginx để phục vụ ứng dụng đã build
-FROM nginx:alpine
+# Cài đặt serve để chạy ứng dụng đã build
+RUN npm install -g serve
 
-# Copy các tệp tĩnh đã build từ container build vào thư mục của Nginx
-COPY --from=build /app/build /usr/share/nginx/html
-
-# Expose cổng 80 để cho truy cập HTTP
-EXPOSE 80
-
-# Lệnh chạy khi container được khởi động
-CMD ["nginx", "-g", "daemon off;"]
+# Chạy ứng dụng khi container được khởi chạy
+CMD ["serve", "-s", "build"]

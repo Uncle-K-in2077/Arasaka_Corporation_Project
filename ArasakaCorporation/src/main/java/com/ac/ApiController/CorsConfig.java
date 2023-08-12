@@ -10,14 +10,19 @@ public class CorsConfig {
 	@Bean
     public WebMvcConfigurer corsConfigurer() {
         return new WebMvcConfigurer() {
-            @Override
-            public void addCorsMappings(CorsRegistry registry) {
-                registry.addMapping("/api/**")
-                        .allowedOrigins("https://lehoangkhai.click/","https://arasaka-qwp0.onrender.com/") // Cho phép truy cập từ tên miền này
-                        .allowedMethods("GET", "POST", "PUT", "DELETE")
-                        .allowedHeaders("*","multipart/form-data")
-                        .allowCredentials(true);
-            }
+//            @Override
+//            public void addCorsMappings(CorsRegistry registry) {
+//                registry.addMapping("/**")
+//                        .allowedOrigins("https://lehoangkhai.click/","https://arasaka-qwp0.onrender.com/") // Cho phép truy cập từ tên miền này
+//                        .allowedMethods("GET", "POST", "PUT", "DELETE")
+//                        .allowedHeaders("*","multipart/form-data")
+//                        .allowCredentials(true);
+//            }
+        	
+        	@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**").allowedOrigins("*").allowedMethods("*").allowedHeaders("*");
+			}
         };
     }
 }
